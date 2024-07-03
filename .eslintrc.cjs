@@ -10,7 +10,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', "react-compiler"],
+  plugins: ['react-refresh', "react-compiler", "plugin:react/jsx-runtime"],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
     "react-compiler/react-compiler": "error",
