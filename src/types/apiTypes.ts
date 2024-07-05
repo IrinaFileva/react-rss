@@ -15,3 +15,6 @@ export interface Character {
   image: string;
   name: string;
 }
+export enum SpaceApi {
+  space = '%20',
+}
