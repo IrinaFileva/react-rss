@@ -1,14 +1,19 @@
 import React, { ChangeEvent } from 'react';
-import { SpaceApi } from 'types/apiTypes';
+import { KEY_LS } from 'types/constants';
+import './SearchBar.css';
 
 interface State {
   request: string;
   error: Error | null;
 }
 
-export class SearchBar extends React.Component<object, State> {
+type Props = {
+  onClick: (request: string) => void;
+};
+
+export class SearchBar extends React.Component<Props, State> {
   state: State = {
-    request: localStorage.getItem('IF-RSS-request') || '',
+    request: localStorage.getItem(KEY_LS) || '',
     error: null,
   };
 
@@ -18,8 +23,9 @@ export class SearchBar extends React.Component<object, State> {
   }
 
   onClick() {
-    const name = this.state.request.trim().replaceAll(' ', SpaceApi.space);
-    localStorage.setItem('IF-RSS-request', name);
+    const name = this.state.request.trim();
+    localStorage.setItem(KEY_LS, name);
+    this.props.onClick(name);
   }
 
   public render(): React.ReactNode {
@@ -28,6 +34,7 @@ export class SearchBar extends React.Component<object, State> {
       <div className="searchBar">
         <input
           type="search"
+          value={this.state.request}
           className="searchInput"
           placeholder="Enter the character's name"
           onChange={(event) => this.onChange(event)}

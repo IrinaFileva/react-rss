@@ -10,11 +10,8 @@ export interface CharacterResponse {
 }
 
 export interface Character {
-  id: string;
+  _id: string;
   description: string;
   image: string;
   name: string;
-}
-export enum SpaceApi {
-  space = '%20',
 }
