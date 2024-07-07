@@ -3,6 +3,7 @@ import { api } from 'api/Api';
 import { CharacterCard } from 'components/CharacterCard/CharacterCard';
 import { Character } from 'types/apiTypes';
 import { KEY_LS } from 'types/constants';
+import Spinner from 'assets/spinner.svg';
 import './CharacterCardList.css';
 
 interface CharacterCardListProps {
@@ -50,7 +51,7 @@ export class CharacterCardList extends React.Component<
         {this.state.isLoading && (
           <div className="spinner">
             <h2>Loading...</h2>
-            <img src="/spinner.svg" alt="spinner" width={250} height={250} />
+            <img src={Spinner} alt="spinner" width={250} height={250} />
           </div>
         )}
         {this.state.characters &&
