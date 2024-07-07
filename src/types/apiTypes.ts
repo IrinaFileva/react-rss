@@ -1,17 +1,16 @@
-export interface CharacterResponse {
-  info: {
-    limit: number;
-    next: string | null;
-    page: number;
-    prev: string | null;
-    total: number;
-  };
-  data: Character[];
+export interface MovieResponse {
+  limit: number;
+  page: number;
+  pages: number;
+  total: number;
+  docs: Movie[];
 }
 
-export interface Character {
-  _id: string;
-  description: string;
-  image: string;
-  name: string;
+export interface Movie {
+  id: string;
+  alternativeName: string;
+  enName: string;
+  year: number;
+  poster: { url: string };
+  type: string;
 }

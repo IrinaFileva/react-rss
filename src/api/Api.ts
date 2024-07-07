@@ -1,22 +1,23 @@
-import { Character, CharacterResponse } from '../types/apiTypes';
+import { MovieResponse } from 'types/apiTypes';
+import {
+  FILTER_TO_QUERY_ALL_MOVIES,
+  FILTER_TO_QUERY_SEARCH,
+  X_API_KEY,
+} from 'types/constants';
+
+const headers = {
+  accept: 'application/json',
+  'X-API-KEY': X_API_KEY,
+};
 
 class Api {
-  private readonly baseUrl =
-    'https://starwars-databank-server.vercel.app/api/v1';
+  private readonly baseUrl = 'https://api.kinopoisk.dev/v1.4/movie';
 
-  private async requestCharacters<T>(name?: string): Promise<T> {
-    const url = `${this.baseUrl}/characters${name ? `/name/${name}` : ''}`;
-    const resp: Response = await fetch(url);
-    const res: T = await resp.json();
+  public async requestMovies(title?: string): Promise<MovieResponse> {
+    const url = `${this.baseUrl}${title ? `${FILTER_TO_QUERY_SEARCH}${title}` : `${FILTER_TO_QUERY_ALL_MOVIES}`}`;
+    const resp: Response = await fetch(url, { headers });
+    const res: MovieResponse = await resp.json();
     return res;
-  }
-
-  public async getCharacters(): Promise<CharacterResponse> {
-    return await this.requestCharacters<CharacterResponse>();
-  }
-
-  public async searchCharacter(name: string): Promise<Character[]> {
-    return await this.requestCharacters<Character[]>(name);
   }
 }
 
