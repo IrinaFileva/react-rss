@@ -1,35 +1,28 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import React from 'react';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
+import { SearchBar } from './components/SearchBar/SearchBar';
+import { CharacterCardList } from 'components/CharacterCardList/CharacterCardList';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+interface State {
+  request: string | null;
 }
 
-export default App;
+export class App extends React.Component<object, State> {
+  state: State = {
+    request: null,
+  };
+
+  public render(): JSX.Element {
+    return (
+      <ErrorBoundary>
+        <header>
+          <h1>Star Wars</h1>
+          <SearchBar onClick={(name) => this.setState({ request: name })} />
+        </header>
+        <main>
+          <CharacterCardList name={this.state.request} />
+        </main>
+      </ErrorBoundary>
+    );
+  }
+}
