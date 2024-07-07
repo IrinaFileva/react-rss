@@ -18,14 +18,14 @@ export class SearchBar extends React.Component<Props, State> {
   };
 
   onChange(event: ChangeEvent<HTMLInputElement>): void {
-    const name = event.target.value;
-    this.setState({ request: name });
+    const title = event.target.value;
+    this.setState({ request: title });
   }
 
   onClick(): void {
-    const name = this.state.request.trim();
-    localStorage.setItem(KEY_LS, name);
-    this.props.onClick(name);
+    const title = this.state.request.trim();
+    localStorage.setItem(KEY_LS, title);
+    this.props.onClick(title);
   }
 
   public render(): React.ReactNode {
@@ -36,7 +36,7 @@ export class SearchBar extends React.Component<Props, State> {
           type="search"
           value={this.state.request}
           className="searchInput"
-          placeholder="Enter the character's name"
+          placeholder="Enter the movie title"
           onChange={(event) => this.onChange(event)}
         ></input>
         <button onClick={() => this.onClick()} type="button">
