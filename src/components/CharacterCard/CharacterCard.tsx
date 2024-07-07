@@ -7,7 +7,7 @@ interface CharacterCardProps {
 }
 
 export class CharacterCard extends React.Component<CharacterCardProps> {
-  render() {
+  public render(): JSX.Element {
     return (
       <div className="characterCard">
         <img

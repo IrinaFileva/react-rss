@@ -17,12 +17,12 @@ export class SearchBar extends React.Component<Props, State> {
     error: null,
   };
 
-  onChange(event: ChangeEvent<HTMLInputElement>) {
+  onChange(event: ChangeEvent<HTMLInputElement>): void {
     const name = event.target.value;
     this.setState({ request: name });
   }
 
-  onClick() {
+  onClick(): void {
     const name = this.state.request.trim();
     localStorage.setItem(KEY_LS, name);
     this.props.onClick(name);
