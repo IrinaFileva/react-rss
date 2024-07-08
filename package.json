@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "preview": "vite preview",
-    "prepare": "cd .. && husky react-rss/.husky",
+    "prepare": "husky",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build"
   },
