@@ -21,10 +21,11 @@ export class MovieCardList extends React.Component<
 > {
   state: MovieCardListState = {
     movies: null,
-    isLoading: true,
+    isLoading: false,
   };
 
   private async updateList(title: string | null): Promise<void> {
+    this.setState({ isLoading: true });
     let response: Movie[];
     if (title) {
       response = (await api.requestMovies(title)).docs;
@@ -55,12 +56,13 @@ export class MovieCardList extends React.Component<
           </div>
         )}
         {this.state.movies &&
+          !this.state.isLoading &&
           this.state.movies.map((character: Movie) => (
             <MovieCard key={character.id} movie={character} />
           ))}
-        {this.state.movies && this.state.movies.length < 1 && (
-          <h2>No results</h2>
-        )}
+        {this.state.movies &&
+          !this.state.isLoading &&
+          this.state.movies.length < 1 && <h2>No results</h2>}
       </div>
     );
   }
