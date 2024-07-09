@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+  background-image: url('./assets/starrySky.jpg');
+  background-size: cover;
+}
+
+h1 {
+  color: rgb(238, 225, 225);
+  backdrop-filter: blur(10px);
+  font-size: 3.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+button {
+  width: 150px;
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 5px;
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: black;
+  cursor: pointer;
+}
+
+button:hover {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+header {
+  width: 88%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 20px 60px;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+@media (max-width: 1575px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
