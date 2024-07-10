@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { KEY_LS } from 'types/constants';
+import { KEY_LS } from 'shared/constants';
 import './SearchBar.css';
 
 interface State {
@@ -41,12 +41,6 @@ export class SearchBar extends React.Component<Props, State> {
         ></input>
         <button onClick={() => this.onClick()} type="button">
           Search
-        </button>
-        <button
-          onClick={() => this.setState({ error: new Error() })}
-          type="button"
-        >
-          Try Error
         </button>
       </div>
     );

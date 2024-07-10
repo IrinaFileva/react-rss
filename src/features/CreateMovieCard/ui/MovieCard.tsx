@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movie } from 'types/apiTypes';
+import { Movie } from 'shared/types';
 import './MovieCard.css';
 
 interface MovieCardProps {

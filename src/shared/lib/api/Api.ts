@@ -1,9 +1,9 @@
-import { MovieResponse } from 'types/apiTypes';
 import {
   FILTER_TO_QUERY_ALL_MOVIES,
   FILTER_TO_QUERY_SEARCH,
   X_API_KEY,
-} from 'types/constants';
+} from 'shared/constants';
+import { MovieResponse } from 'shared/types';
 
 const headers = {
   accept: 'application/json',
@@ -17,6 +17,7 @@ class Api {
     const url = `${this.baseUrl}${title ? `${FILTER_TO_QUERY_SEARCH}${title}` : `${FILTER_TO_QUERY_ALL_MOVIES}`}`;
     const resp: Response = await fetch(url, { headers });
     const res: MovieResponse = await resp.json();
+    console.log(res);
     return res;
   }
 }

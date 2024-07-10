@@ -1,7 +1,7 @@
 import React from 'react';
-import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
-import { SearchBar } from 'components/SearchBar/SearchBar';
-import { MovieCardList } from 'components/MovieCardList/MoviesCardList';
+import { ErrorBoundary } from 'shared/lib/ui/ErrorBoundary';
+import { SearchBar } from 'features/SearchMovie';
+import { MovieCardList } from 'widgets/MovieCardList';
 
 interface State {
   request: string | null;

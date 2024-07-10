@@ -16,7 +16,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 0 calc(20px - (100vw - 100%)) 0 0;
-  background-image: url('./assets/starrySky.jpg');
+  background-image: url('./shared/assets/starrySky.jpg');
   background-size: cover;
 }
 

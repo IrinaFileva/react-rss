@@ -1,9 +1,9 @@
 import React from 'react';
-import { api } from 'api/Api';
-import { Movie } from 'types/apiTypes';
-import { KEY_LS } from 'types/constants';
-import { MovieCard } from 'components/MovieCard/MovieCard';
-import Spinner from 'assets/spinner.svg';
+import { MovieCard } from 'features/CreateMovieCard';
+import { Movie } from 'shared/types';
+import { KEY_LS } from 'shared/constants';
+import { api } from 'shared/lib/api';
+import Spinner from 'shared/assets/spinner.svg';
 import './MoviesCardList.css';
 
 interface MovieCardListProps {
