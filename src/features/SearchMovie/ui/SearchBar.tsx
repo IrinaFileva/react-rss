@@ -1,48 +1,39 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { KEY_LS } from 'shared/constants';
 import './SearchBar.css';
 
-interface State {
-  request: string;
-  error: Error | null;
+interface Props {
+  onClickCheck: (request: string) => void;
 }
 
-type Props = {
-  onClick: (request: string) => void;
-};
+export const SearchBar: FC<Props> = ({ onClickCheck }) => {
+  const [request, setRequest] = useState<string>(
+    localStorage.getItem(KEY_LS) || ''
+  );
 
-export class SearchBar extends React.Component<Props, State> {
-  state: State = {
-    request: localStorage.getItem(KEY_LS) || '',
-    error: null,
+  const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const title = event.target.value;
+    setRequest(title);
   };
 
-  onChange(event: ChangeEvent<HTMLInputElement>): void {
-    const title = event.target.value;
-    this.setState({ request: title });
-  }
+  const onClick = (): void => {
+    const title = request.trim();
+    localStorage.setItem(KEY_LS, title || '');
+    onClickCheck(title);
+  };
 
-  onClick(): void {
-    const title = this.state.request.trim();
-    localStorage.setItem(KEY_LS, title);
-    this.props.onClick(title);
-  }
-
-  public render(): React.ReactNode {
-    if (this.state.error) throw this.state.error;
-    return (
-      <div className="searchBar">
-        <input
-          type="search"
-          value={this.state.request}
-          className="searchInput"
-          placeholder="Enter the movie title"
-          onChange={(event) => this.onChange(event)}
-        ></input>
-        <button onClick={() => this.onClick()} type="button">
-          Search
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="searchBar">
+      <input
+        type="search"
+        value={request ? request : ''}
+        className="searchInput"
+        placeholder="Enter the movie title"
+        onChange={(event) => onChange(event)}
+      ></input>
+      <button onClick={onClick} type="button">
+        Search
+      </button>
+    </div>
+  );
+};

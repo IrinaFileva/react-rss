@@ -1,1 +1,1 @@
-export { api } from './Api';
+export { requestMovies } from './RequestMovies ';
