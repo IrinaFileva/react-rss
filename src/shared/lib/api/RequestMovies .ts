@@ -1,14 +1,14 @@
-import {
-  BASE_URL,
-  FILTER_TO_QUERY_ALL_MOVIES,
-  FILTER_TO_QUERY_SEARCH,
-} from 'shared/constants';
-import { headers } from 'shared/constants/constants';
+import { BASE_URL } from 'shared/constants';
+import { PAGE } from 'shared/constants/constants';
 import { MovieResponse } from 'shared/types';
 
-export async function requestMovies(title?: string): Promise<MovieResponse> {
-  const url = `${BASE_URL}${title ? `${FILTER_TO_QUERY_SEARCH}${title}` : `${FILTER_TO_QUERY_ALL_MOVIES}`}`;
-  const resp: Response = await fetch(url, { headers });
+export async function requestMovies(
+  title: string,
+  number: number
+): Promise<MovieResponse> {
+  const url = `${BASE_URL}&s=${title}}&${PAGE}${number}`;
+  const resp: Response = await fetch(url);
   const res: MovieResponse = await resp.json();
+  console.log(res);
   return res;
 }

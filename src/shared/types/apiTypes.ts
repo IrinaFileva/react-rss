@@ -1,16 +1,12 @@
 export interface MovieResponse {
-  limit: number;
-  page: number;
-  pages: number;
-  total: number;
-  docs: Movie[];
+  Search: Movie[];
+  totalResults: string;
 }
 
 export interface Movie {
-  id: string;
-  alternativeName: string;
-  enName: string;
-  year: number;
-  poster: { url: string };
-  type: string;
+  Poster: string;
+  Title: string;
+  Type: string;
+  Year: number;
+  imdbID: string;
 }
