@@ -1,7 +1,6 @@
 .pagination {
   display: flex;
   gap: 5px;
-  list-style: none;
   padding: 20px 0;
 }
 
@@ -9,10 +8,12 @@
   min-width: 32px;
   background-color: black;
   border-radius: 100%;
+  color: white;
   border: 1px solid white;
   padding: 5px;
   text-align: center;
   font-size: 14px;
+  text-decoration: none;
   cursor: pointer;
 }
 

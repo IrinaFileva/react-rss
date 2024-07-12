@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
+import { PAGE } from 'shared/constants/constants';
 import './PaginationBar.css';
 
 interface PaginationProps {
   totalResults: string;
   activePage: number;
-  onClickPage: (page: number) => void;
 }
 
 export const PaginationBar: FC<PaginationProps> = ({
   totalResults,
-  onClickPage,
   activePage,
 }) => {
   const offsetPagination = 370;
@@ -49,17 +49,19 @@ export const PaginationBar: FC<PaginationProps> = ({
         &#9668; prev 10
       </button>
       <div className="paginationWindow">
-        <ul className="pagination" style={{ marginLeft: `-${shift}px` }}>
+        <div className="pagination" style={{ marginLeft: `-${shift}px` }}>
           {countPage.map((page: string, index: number) => (
-            <li
-              className={activePage === +page ? ' page activePage' : 'page'}
-              onClick={() => onClickPage(+page)}
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? 'page activePage' : 'page'
+              }
               key={index}
+              to={`/${PAGE}${page}`}
             >
               {page}
-            </li>
+            </NavLink>
           ))}
-        </ul>
+        </div>
       </div>
       <button
         onClick={onClickNext}
