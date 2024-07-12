@@ -15,6 +15,10 @@
   background-color: black;
 }
 
+.buttonSearch {
+  height: 3rem;
+}
+
 .searchInput::-webkit-search-cancel-button {
   cursor: pointer;
 }
