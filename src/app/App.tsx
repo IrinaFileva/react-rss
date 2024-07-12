@@ -1,23 +1,7 @@
-import { FC, useState } from 'react';
-import { ErrorBoundary } from 'shared/lib/ui/ErrorBoundary';
-import { SearchBar } from 'features/SearchMovie';
-import { MovieCardList } from 'widgets/MovieCardList';
-import { KEY_LS } from 'shared/constants';
+import { FC } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './providers/routerProvider';
 
 export const App: FC = () => {
-  const [request, setRequest] = useState<string>(
-    localStorage.getItem(KEY_LS) || ''
-  );
-
-  return (
-    <ErrorBoundary>
-      <header>
-        <h1>Movies</h1>
-        <SearchBar onClickCheck={(title) => setRequest(title)} />
-      </header>
-      <main>
-        <MovieCardList title={request} />
-      </main>
-    </ErrorBoundary>
-  );
+  return <RouterProvider router={router} />;
 };
