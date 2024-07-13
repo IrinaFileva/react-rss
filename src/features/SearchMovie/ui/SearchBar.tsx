@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { KEY_LS } from 'shared/constants';
 import './SearchBar.css';
 import { Link } from 'react-router-dom';
-import { PAGE } from 'shared/constants/constants';
+import { Paths } from 'shared/types';
 
 interface Props {
   onClickCheck: (request: string) => void;
@@ -36,7 +36,7 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
           placeholder="Enter the movie title"
           onChange={(event) => onChange(event)}
         ></input>
-        <Link to={`/${PAGE}${1}`}>
+        <Link to={`/${Paths.search}${1}`}>
           <button
             className="button buttonSearch"
             onClick={onClick}
