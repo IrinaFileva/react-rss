@@ -1,17 +1,15 @@
-import { ChangeEvent, FC, useState } from 'react';
-import { KEY_LS } from 'shared/constants';
+import { ChangeEvent, FC } from 'react';
 import './SearchBar.css';
 import { Link } from 'react-router-dom';
 import { Paths } from 'shared/types';
+import { useLocalStorage } from 'shared/lib/hooks';
 
 interface Props {
   onClickCheck: (request: string) => void;
 }
 
 export const SearchBar: FC<Props> = ({ onClickCheck }) => {
-  const [request, setRequest] = useState<string>(
-    localStorage.getItem(KEY_LS) || ''
-  );
+  const [request, setRequest] = useLocalStorage();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const title = event.target.value;
@@ -19,9 +17,7 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
   };
 
   const onClick = (): void => {
-    console.log(request);
     const title = request.trim();
-    localStorage.setItem(KEY_LS, title || '');
     onClickCheck(title);
   };
 
