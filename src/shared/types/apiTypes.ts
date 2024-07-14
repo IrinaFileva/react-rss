@@ -1,6 +1,7 @@
 export interface MovieResponse {
   Search: Movie[];
   totalResults: string;
+  Error: string;
 }
 
 export interface Movie {
@@ -9,4 +10,14 @@ export interface Movie {
   Type: string;
   Year: number;
   imdbID: string;
+}
+
+export interface MovieById {
+  Poster: string;
+  Title: string;
+  Plot: string;
+  Actors: string;
+  Director: string;
+  Type: string;
+  Year: number;
 }
