@@ -19,7 +19,7 @@ export interface MovieById {
   Actors: string;
   Director: string;
   Type: string;
-  Year: number;
+  Year: string;
 }
 
 export enum TeamMovie {

@@ -8,6 +8,5 @@ export async function requestMovies(
   const url = `${BASE_URL}&s=${title}&page=${number}`;
   const resp: Response = await fetch(url);
   const res: MovieResponse = await resp.json();
-  console.log(res);
   return res;
 }

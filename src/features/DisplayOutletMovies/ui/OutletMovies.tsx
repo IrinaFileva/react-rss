@@ -24,14 +24,16 @@ export const OutletMovies: FC = () => {
 
   return (
     <div className="movieID">
-      {isLoading ? (
-        <Spinner />
-      ) : movie ? (
+      {movie && (
         <>
           <Link to={`/${Paths.search}${page}`}>
             <button className="button movieID_button">Close</button>
           </Link>
-          <img className="movieID_img" src={movie.Poster}></img>
+          <img
+            className="movieID_img"
+            src={movie.Poster}
+            alt={movie.Poster}
+          ></img>
           <h2>{movie.Title}</h2>
           <h3>{movie.Type}</h3>
           <p>{movie.Plot}</p>
@@ -47,9 +49,8 @@ export const OutletMovies: FC = () => {
           </p>
           <h3>{movie.Year}</h3>
         </>
-      ) : (
-        <>Not Movies</>
-      )}
+      )}{' '}
+      {isLoading && !movie && <Spinner />}
     </div>
   );
 };

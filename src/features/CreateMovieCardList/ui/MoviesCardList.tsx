@@ -28,6 +28,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({
           <PaginationBar totalResults={data.totalResults} activePage={page} />
           <div
             className="characterCardList"
+            data-testid="list"
             onClick={() => navigate(`/${Paths.search}${page}`)}
           >
             {data.Search &&

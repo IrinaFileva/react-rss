@@ -1,3 +1,3 @@
 export { requestMoviesById } from './RequestMovieById';
 
-export { requestMovies } from './RequestMovies ';
+export { requestMovies } from './RequestMovies';
