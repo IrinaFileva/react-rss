@@ -27,23 +27,14 @@ export const PaginationBar: FC<PaginationProps> = ({
     addShist(countStart);
   }, [countStart]);
 
-  const onClickNext = () => {
-    const margin: number = shift + offsetPagination;
-    addShist(margin);
-    setClick(countClick + 1);
-  };
-
-  const onClickPrev = () => {
-    const margin: number = shift - offsetPagination;
-    addShist(margin);
-    setClick(countClick - 1);
-  };
-
   return (
     <div className="paginationBar">
       <button
         className="paginationButton"
-        onClick={onClickPrev}
+        onClick={() => {
+          addShist(shift - offsetPagination);
+          setClick(countClick - 1);
+        }}
         disabled={+shift <= 0}
       >
         &#9668; prev 10
@@ -64,7 +55,10 @@ export const PaginationBar: FC<PaginationProps> = ({
         </div>
       </div>
       <button
-        onClick={onClickNext}
+        onClick={() => {
+          addShist(shift + offsetPagination);
+          setClick(countClick + 1);
+        }}
         disabled={
           Math.floor(countPage.length / limitMoviesOnPage) <= countClick
         }

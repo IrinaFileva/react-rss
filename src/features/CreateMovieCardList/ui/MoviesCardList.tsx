@@ -19,26 +19,20 @@ export const MovieCardList: FC<MovieCardListProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const onClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const target: HTMLElement = e.target as HTMLElement;
-    if (target.classList.contains('card')) {
-      e.stopPropagation();
-    } else {
-      navigate(`/${Paths.search}${page}`);
-    }
-  };
-
   return (
     <main className="mainHomePage">
       {isLoading ? (
         <Spinner />
-      ) : data && data.Search ? (
+      ) : data && data.Search && data.totalResults ? (
         <>
           <PaginationBar totalResults={data.totalResults} activePage={page} />
-          <div className="characterCardList" onClick={onClick}>
+          <div
+            className="characterCardList"
+            onClick={() => navigate(`/${Paths.search}${page}`)}
+          >
             {data.Search &&
-              data.Search.map((character: Movie) => (
-                <MovieCard key={character.imdbID} movie={character} />
+              data.Search.map((character: Movie, index: number) => (
+                <MovieCard key={index} movie={character} />
               ))}
           </div>
         </>

@@ -34,7 +34,6 @@ export const Main: FC = () => {
       <div className="mainPage_noOutlet">
         <SearchBar
           onClickCheck={(request) => {
-            console.log(request);
             setRequest(request);
           }}
         />
