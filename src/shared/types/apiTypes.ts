@@ -21,3 +21,8 @@ export interface MovieById {
   Type: string;
   Year: number;
 }
+
+export enum TeamMovie {
+  actors = 'Actors:',
+  director = 'Director:',
+}

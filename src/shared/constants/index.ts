@@ -1,1 +1,1 @@
-export { KEY_LS, BASE_URL, X_API_KEY } from './constants';
+export { KEY_LS, BASE_URL, INITIAL_REQUEST } from './constants';
