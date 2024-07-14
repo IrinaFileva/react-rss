@@ -1,0 +1,36 @@
+.searchBar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.searchInput {
+  width: 35rem;
+  font-size: 22px;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: black;
+}
+
+.buttonSearch {
+  height: 3rem;
+}
+
+.searchInput::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+@media (max-width: 970px) {
+  .searchBar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .searchInput {
+    width: 300px;
+  }
+}
