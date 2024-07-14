@@ -1,0 +1,7 @@
+.mainPage {
+  display: flex;
+}
+
+.mainPage_noOutlet {
+  width: 100%;
+}
