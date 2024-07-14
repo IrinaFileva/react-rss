@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { MovieCard } from 'features/CreateMovieCard';
-import { Movie, MovieResponse, Paths } from 'shared/types';
-import { PaginationBar } from 'features/AddPaginationBar/ui/PaginationBar';
-import './MoviesCardList.css';
-import { Spinner } from 'shared/lib/ui/Spinner';
 import { useNavigate } from 'react-router-dom';
+import { MovieCard } from 'features/CreateMovieCard';
+import { PaginationBar } from 'features/AddPaginationBar';
+import { Movie, MovieResponse, Paths } from 'shared/types';
+import { Spinner } from 'shared/lib/ui/Spinner';
+import './MoviesCardList.css';
 
 interface MovieCardListProps {
   isLoading: boolean;
@@ -43,7 +43,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({
           </div>
         </>
       ) : (
-        <h2 className="noMovies">{data?.Error}</h2>
+        <h2 className="noMovies">{data && data.Error}</h2>
       )}
     </main>
   );

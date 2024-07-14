@@ -12,11 +12,11 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: `${Paths.search}:page`,
+        path: `${Paths.search}${Paths.page}`,
         element: <Main />,
         children: [
           {
-            path: `${Paths.details}:id`,
+            path: `${Paths.details}${Paths.id}`,
             element: <OutletMovies />,
           },
         ],

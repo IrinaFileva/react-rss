@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
-import './PaginationBar.css';
 import { Paths } from 'shared/types';
+import './PaginationBar.css';
 
 interface PaginationProps {
   totalResults: string;

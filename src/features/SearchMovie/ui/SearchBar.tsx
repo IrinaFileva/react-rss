@@ -1,8 +1,8 @@
 import { ChangeEvent, FC } from 'react';
-import './SearchBar.css';
 import { Link } from 'react-router-dom';
 import { Paths } from 'shared/types';
 import { useLocalStorage } from 'shared/lib/hooks';
+import './SearchBar.css';
 
 interface Props {
   onClickCheck: (request: string) => void;

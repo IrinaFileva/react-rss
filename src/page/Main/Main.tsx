@@ -1,33 +1,32 @@
 import { FC, useCallback, useEffect, useState } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
 import { MovieCardList } from 'features/CreateMovieCardList';
+import { SearchBar } from 'features/SearchMovie';
 import { MovieResponse } from 'shared/types';
 import { requestMovies } from 'shared/lib/api';
-import { Outlet, useParams } from 'react-router-dom';
-import { SearchBar } from 'features/SearchMovie';
-import './Main.css';
 import { useLocalStorage } from 'shared/lib/hooks';
+import { INITIAL_REQUEST } from 'shared/constants';
+import './Main.css';
 
 export const Main: FC = () => {
   const { page } = useParams();
   const [isLoading, setLoading] = useState<boolean>(false);
   const [data, getData] = useState<MovieResponse | null>(null);
   const [request, setRequest] = useLocalStorage();
+  const activePage: number = page ? +page : 1;
 
   const updateList = useCallback(
     async (request: string): Promise<void> => {
       setLoading(true);
-      const response: MovieResponse = await requestMovies(
-        request,
-        page ? +page : 1
-      );
+      const response: MovieResponse = await requestMovies(request, activePage);
       getData(response);
       setLoading(false);
     },
-    [page]
+    [activePage]
   );
 
   useEffect(() => {
-    updateList(request || 'new');
+    updateList(request || INITIAL_REQUEST);
   }, [page, request, updateList]);
 
   return (
@@ -39,11 +38,7 @@ export const Main: FC = () => {
             setRequest(request);
           }}
         />
-        <MovieCardList
-          isLoading={isLoading}
-          data={data}
-          page={page ? +page : 1}
-        />
+        <MovieCardList isLoading={isLoading} data={data} page={activePage} />
       </div>
       <Outlet />
     </div>

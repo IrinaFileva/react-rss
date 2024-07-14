@@ -1,7 +1,7 @@
 import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Movie, Paths } from 'shared/types';
 import './MovieCard.css';
-import { NavLink } from 'react-router-dom';
 
 interface MovieCardProps {
   movie: Movie;
