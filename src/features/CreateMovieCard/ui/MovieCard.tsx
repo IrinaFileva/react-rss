@@ -1,6 +1,12 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Movie, Paths } from 'shared/types';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
+import {
+  addMovie,
+  deleteMovie,
+  getSelectedMovies,
+} from 'entities/SelectedMovies';
 import './MovieCard.css';
 
 interface MovieCardProps {
@@ -8,6 +14,22 @@ interface MovieCardProps {
 }
 
 export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
+  const dispatch = useAppDispatch();
+  const selectedMovies = useAppSelector(getSelectedMovies);
+  const [isChecked, setChecked] = useState<boolean>(
+    selectedMovies.includes(movie)
+  );
+
+  useEffect(() => {
+    if (isChecked) {
+      dispatch(addMovie(movie));
+    } else {
+      dispatch(deleteMovie(movie));
+    }
+  }, [isChecked, dispatch, movie]);
+
+  console.log(selectedMovies, selectedMovies.includes(movie), isChecked);
+
   return (
     <NavLink
       className="movieCard card"
@@ -24,6 +46,13 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
       <p className="movieCard_info card">
         {movie.Type} {movie.Year}
       </p>
+      <input
+        onClick={(e) => e.stopPropagation()}
+        checked={isChecked}
+        onChange={() => setChecked(!isChecked)}
+        className="movieCard_checkbox"
+        type="checkbox"
+      ></input>
     </NavLink>
   );
 };
