@@ -1,3 +1,6 @@
-export { requestMoviesById } from './RequestMovieById';
+export { api } from './model/services/getMoviesList';
 
-export { requestMovies } from './RequestMovies';
+export {
+  useGetMovieByIdQuery,
+  useGetMoviesQuery,
+} from './model/services/getMoviesList';

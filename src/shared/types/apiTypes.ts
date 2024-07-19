@@ -1,6 +1,6 @@
 export interface MovieResponse {
-  Search?: Movie[];
-  totalResults?: string;
+  Search: Movie[];
+  totalResults: string;
   Error?: string;
 }
 
