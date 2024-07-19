@@ -1,12 +1,13 @@
 import { FC, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 export const Layout: FC = () => {
   const navigate = useNavigate();
+  const { page } = useParams();
 
   useEffect(() => {
-    navigate('search/1');
-  }, [navigate]);
+    if (!page) navigate('search/1');
+  }, [page, navigate]);
 
   return <Outlet />;
 };

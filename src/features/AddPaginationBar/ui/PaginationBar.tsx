@@ -5,7 +5,7 @@ import { Paths } from 'shared/types';
 import './PaginationBar.css';
 
 interface PaginationProps {
-  totalResults: string;
+  totalResults: string | undefined;
   activePage: number;
 }
 
@@ -28,44 +28,46 @@ export const PaginationBar: FC<PaginationProps> = ({
   }, [countStart]);
 
   return (
-    <div className="paginationBar">
-      <button
-        className="paginationButton"
-        onClick={() => {
-          addShist(shift - offsetPagination);
-          setClick(countClick - 1);
-        }}
-        disabled={+shift <= 0}
-      >
-        &#9668; prev 10
-      </button>
-      <div className="paginationWindow">
-        <div className="pagination" style={{ marginLeft: `-${shift}px` }}>
-          {countPage.map((page: string, index: number) => (
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? 'page activePage' : 'page'
-              }
-              key={index}
-              to={`/${Paths.search}${page}`}
-            >
-              {page}
-            </NavLink>
-          ))}
+    totalResults && (
+      <div className="paginationBar">
+        <button
+          className="paginationButton"
+          onClick={() => {
+            addShist(shift - offsetPagination);
+            setClick(countClick - 1);
+          }}
+          disabled={+shift <= 0}
+        >
+          &#9668; prev 10
+        </button>
+        <div className="paginationWindow">
+          <div className="pagination" style={{ marginLeft: `-${shift}px` }}>
+            {countPage.map((page: string, index: number) => (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'page activePage' : 'page'
+                }
+                key={index}
+                to={`/${Paths.search}${page}`}
+              >
+                {page}
+              </NavLink>
+            ))}
+          </div>
         </div>
+        <button
+          onClick={() => {
+            addShist(shift + offsetPagination);
+            setClick(countClick + 1);
+          }}
+          disabled={
+            Math.floor(countPage.length / limitMoviesOnPage) <= countClick
+          }
+          className="paginationButton"
+        >
+          next 10 &#9658;
+        </button>
       </div>
-      <button
-        onClick={() => {
-          addShist(shift + offsetPagination);
-          setClick(countClick + 1);
-        }}
-        disabled={
-          Math.floor(countPage.length / limitMoviesOnPage) <= countClick
-        }
-        className="paginationButton"
-      >
-        next 10 &#9658;
-      </button>
-    </div>
+    )
   );
 };
