@@ -28,9 +28,13 @@ export const selectedMovieSlice = createSlice({
         );
       }
     },
+    clearStateMovies(state) {
+      state.movies.length = 0;
+    },
   },
 });
 
 export const { reducer: selectedMovieReducer } = selectedMovieSlice;
 
-export const { addMovie, deleteMovie } = selectedMovieSlice.actions;
+export const { addMovie, deleteMovie, clearStateMovies } =
+  selectedMovieSlice.actions;

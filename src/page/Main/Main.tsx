@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { MovieCardList } from 'features/CreateMovieCardList';
 import { SearchBar } from 'features/SearchMovie';
 import { useLocalStorage } from 'shared/lib/hooks';
+import { SelectedMoviesModal } from 'features/UseSelectedMovies';
 import './Main.css';
 
 export const Main: FC = () => {
@@ -17,6 +18,7 @@ export const Main: FC = () => {
           }}
         />
         <MovieCardList request={request} />
+        <SelectedMoviesModal />
       </div>
       <Outlet />
     </div>

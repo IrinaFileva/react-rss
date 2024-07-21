@@ -21,14 +21,18 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   );
 
   useEffect(() => {
+    if (selectedMovies.length <= 0) {
+      setChecked(false);
+    }
+  }, [selectedMovies]);
+
+  useEffect(() => {
     if (isChecked) {
       dispatch(addMovie(movie));
     } else {
       dispatch(deleteMovie(movie));
     }
   }, [isChecked, dispatch, movie]);
-
-  console.log(selectedMovies, selectedMovies.includes(movie), isChecked);
 
   return (
     <NavLink
