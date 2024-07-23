@@ -24,10 +24,6 @@ export const SelectedMoviesModal: FC = () => {
     <>
       {selectedMovies.length > 0 && (
         <div className={`modal ${isOpen}`}>
-          <p className="modal_description">
-            {' '}
-            Selected {selectedMovies.length} movies
-          </p>
           <button
             className="unselect"
             type="button"
@@ -35,6 +31,9 @@ export const SelectedMoviesModal: FC = () => {
           >
             Unselect all &#10060;
           </button>
+          <p className="modal_description">
+            {`Selected ${selectedMovies.length} movies`}
+          </p>
           <a
             className="download"
             href={getItemsForCsv(selectedMovies)}

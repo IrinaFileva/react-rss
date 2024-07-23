@@ -27,21 +27,32 @@ export const PaginationBar: FC<PaginationProps> = ({
     addShist(countStart);
   }, [countStart]);
 
+  const onClickPrev = () => {
+    addShist(shift - offsetPagination);
+    setClick(countClick - 1);
+  };
+
+  const onClickNext = () => {
+    addShist(shift + offsetPagination);
+    setClick(countClick + 1);
+  };
+
   return (
     totalResults && (
       <div className="paginationBar">
         <button
           className="paginationButton"
-          onClick={() => {
-            addShist(shift - offsetPagination);
-            setClick(countClick - 1);
-          }}
+          onClick={onClickPrev}
           disabled={+shift <= 0}
         >
           &#9668; prev 10
         </button>
         <div className="paginationWindow">
-          <div className="pagination" style={{ marginLeft: `-${shift}px` }}>
+          <div
+            className="pagination"
+            style={{ marginLeft: `-${shift}px` }}
+            data-testid={'15'}
+          >
             {countPage.map((page: string, index: number) => (
               <NavLink
                 className={({ isActive }) =>
@@ -56,10 +67,7 @@ export const PaginationBar: FC<PaginationProps> = ({
           </div>
         </div>
         <button
-          onClick={() => {
-            addShist(shift + offsetPagination);
-            setClick(countClick + 1);
-          }}
+          onClick={onClickNext}
           disabled={
             Math.floor(countPage.length / limitMoviesOnPage) <= countClick
           }

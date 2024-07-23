@@ -24,30 +24,27 @@ export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
 
   return (
     <main className="mainHomePage">
-      {!isFetching && data && data.Error && (
-        <h2 className="noMovies">{data.Error}</h2>
-      )}
       {isFetching ? (
         <Spinner />
+      ) : data && !data.Error ? (
+        <>
+          <PaginationBar
+            totalResults={data.totalResults}
+            activePage={activePage}
+          />
+          <div
+            className="characterCardList"
+            data-testid="list"
+            onClick={() => navigate(`/${Paths.search}${page}`)}
+          >
+            {data.Search &&
+              data.Search.map((movie: Movie) => (
+                <MovieCard key={movie.imdbID} movie={movie} />
+              ))}
+          </div>
+        </>
       ) : (
-        data && (
-          <>
-            <PaginationBar
-              totalResults={data.totalResults}
-              activePage={activePage}
-            />
-            <div
-              className="characterCardList"
-              data-testid="list"
-              onClick={() => navigate(`/${Paths.search}${page}`)}
-            >
-              {data.Search &&
-                data.Search.map((movie: Movie) => (
-                  <MovieCard key={movie.imdbID} movie={movie} />
-                ))}
-            </div>
-          </>
-        )
+        <h2 className="noMovies">{data && data.Error}</h2>
       )}
     </main>
   );

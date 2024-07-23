@@ -3,5 +3,6 @@
 }
 
 .mainPage_noOutlet {
+  position: relative;
   width: 100%;
 }

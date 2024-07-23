@@ -17,3 +17,5 @@ export const api = createApi({
 });
 
 export const { useGetMoviesQuery, useGetMovieByIdQuery } = api;
+
+export const { getMovies, getMovieById } = api.endpoints;
