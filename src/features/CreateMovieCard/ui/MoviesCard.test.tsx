@@ -1,16 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
 import { MovieCard } from './MovieCard';
 import { render } from '@testing-library/react';
-import { Movie } from 'shared/types';
 import userEvent from '@testing-library/user-event';
-
-const testMovie: Movie = {
-  Poster: 'https://www.kinopoisk.ru/picture/2836590/',
-  Title: 'Super Men',
-  Type: 'movie',
-  Year: 1978,
-  imdbID: '123456',
-};
+import { Provider } from 'react-redux';
+import { store } from 'app/providers/storeProvider/config/store';
+import { testMovie } from 'shared/test';
 
 describe('testing Card', () => {
   afterEach(() => {
@@ -20,7 +14,9 @@ describe('testing Card', () => {
   it('testing incoming data', () => {
     const { getByText, getByAltText } = render(
       <BrowserRouter>
-        <MovieCard movie={testMovie} />
+        <Provider store={store}>
+          <MovieCard movie={testMovie} />
+        </Provider>
       </BrowserRouter>
     );
     const title = getByText(testMovie.Title);
@@ -36,7 +32,9 @@ describe('testing Card', () => {
   it('testing clicking card opens a detailed card component', async () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <MovieCard movie={testMovie} />
+        <Provider store={store}>
+          <MovieCard movie={testMovie} />
+        </Provider>
       </BrowserRouter>
     );
 

@@ -8,3 +8,8 @@ test('testing getPageCount', () => {
   const result = getPageCount(testData);
   expect(result).toStrictEqual(expectedResullt);
 });
+
+test('testing getPageCount if the argument is undefined', () => {
+  const result = getPageCount(undefined);
+  expect(result).toStrictEqual([]);
+});
