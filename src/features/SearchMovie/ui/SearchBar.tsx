@@ -22,7 +22,7 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
   };
 
   return (
-    <header>
+    <>
       <h1>Movies</h1>
       <form className="searchBar">
         <input
@@ -42,6 +42,6 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
           </button>
         </Link>
       </form>
-    </header>
+    </>
   );
 };
