@@ -7,7 +7,7 @@
 #root {
   width: 100%;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: white;
+  color: var(--text-color);
 }
 
 body {
@@ -15,13 +15,10 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 0 calc(20px - (100vw - 100%)) 0 0;
-  background-image: url('./shared/assets/starrySky.jpg');
-  background-size: cover;
 }
 
 h1 {
-  color: rgb(238, 225, 225);
+  color: var(--text-color);
   backdrop-filter: blur(10px);
   font-size: 3.9rem;
   font-weight: 700;
@@ -31,34 +28,16 @@ h1 {
 .button {
   width: 150px;
   border-radius: 8px;
-  border: 1px solid white;
+  border: 1px solid var(--border-color);
   padding: 5px;
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-size: 22px;
   font-weight: 500;
   font-family: inherit;
-  background-color: black;
   cursor: pointer;
 }
 
 button:hover {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-header {
-  width: 88%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin: 0 auto;
-  padding: 20px 60px;
-  padding-bottom: 0;
-  text-align: center;
-}
-
-@media (max-width: 1575px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
 }
