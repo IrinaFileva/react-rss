@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { Theme, ThemeContext } from '../../theme/themeContext';
 import { KEY_LS_THEME } from 'shared/constants';
+import { Theme, ThemeContext } from 'shared/lib/theme';
 
 type UseThemeResult = {
   toggleTheme: () => void;

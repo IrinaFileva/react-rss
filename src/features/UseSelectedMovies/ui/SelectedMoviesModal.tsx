@@ -1,5 +1,5 @@
-import { clearStateMovies, getSelectedMovies } from 'entities/SelectedMovies';
 import { FC, useEffect, useState } from 'react';
+import { clearStateMovies, getSelectedMovies } from 'entities/SelectedMovies';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
 import { getItemsForCsv } from 'shared/lib/changeData';
 import { Movie } from 'shared/types';

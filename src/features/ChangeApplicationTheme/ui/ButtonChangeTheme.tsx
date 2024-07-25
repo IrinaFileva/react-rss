@@ -1,4 +1,5 @@
-import { Theme, useTheme } from 'app/providers/themeProvider';
+import { useTheme } from 'shared/lib/hooks';
+import { Theme } from 'shared/lib/theme';
 import { FC } from 'react';
 import './ButtonChangeTheme.css';
 

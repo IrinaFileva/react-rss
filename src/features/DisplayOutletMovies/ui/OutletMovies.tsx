@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Paths, TeamMovie } from 'shared/types';
 import { Spinner } from 'shared/lib/ui/Spinner';
-import './OutletMovies.css';
 import { useGetMovieByIdQuery } from 'shared/lib/api';
+import './OutletMovies.css';
 
 export const OutletMovies: FC = () => {
   const { id } = useParams();
