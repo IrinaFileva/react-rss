@@ -1,0 +1,48 @@
+.movieCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 230px;
+  height: 330px;
+  padding: 5px;
+  background: var(--bg-color);
+  border-radius: 5px;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.movieCard_image {
+  width: 100%;
+  height: 230px;
+}
+
+.movieCard_title {
+  text-align: center;
+  font-size: 18px;
+}
+
+.movieCard_info {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  padding: 0 10px;
+  margin-top: auto;
+  order: 2;
+}
+
+.movieCard_checkbox {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: inherit;
+}
+
+.movieCard:hover .movieCard_image {
+  width: 99%;
+  height: 225px;
+  margin-bottom: 5px;
+}

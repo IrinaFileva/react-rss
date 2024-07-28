@@ -1,0 +1,24 @@
+.mainHomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  border-top: 1px solid grey;
+  margin: 30px auto;
+  padding-bottom: 73px;
+}
+
+.characterCardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin: 0 -7%;
+}
+
+.noMovies {
+  font-size: 52px;
+  padding: 10%;
+  color: var(--text-color);
+  backdrop-filter: blur(20px);
+}
