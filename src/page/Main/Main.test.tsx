@@ -8,10 +8,28 @@ import { useLocalStorage } from 'shared/lib/hooks';
 import userEvent from '@testing-library/user-event';
 
 describe('testing Main Page', () => {
-  const testLSPrev = 'prev';
-  const testLSNew = 'new';
+  it('testing testing base shape of main', async () => {
+    const { getByText, getByTestId } = render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      </BrowserRouter>
+    );
+
+    const title = getByText('Movies');
+    expect(title).toBeInTheDocument();
+
+    const btnTheme = getByTestId('btnTheme');
+    expect(btnTheme).toBeInTheDocument();
+
+    const loader = getByText('Loading...');
+    expect(loader).toBeInTheDocument();
+  });
 
   it('testing props Search Bar', async () => {
+    const testLSPrev = 'prev';
+    const testLSNew = 'new';
     localStorage.setItem(KEY_LS, testLSPrev);
     const { getByText } = render(
       <BrowserRouter>

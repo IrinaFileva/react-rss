@@ -17,28 +17,41 @@ const testMoviesResponse: MovieResponse = {
   totalResults: '300',
 };
 
+const responseError = { Error: 'Movie not found!' };
+
+const requestError = 'ewjrjdi';
+
+const successResponse = http.get(
+  `${BASE_URL}&s=${testRequest}&page=${mockPage}`,
+  async () => {
+    return HttpResponse.json(testMoviesResponse);
+  }
+);
+
+const errorResponse = http.get(
+  `${BASE_URL}&s=${requestError}&page=${mockPage}`,
+  async () => {
+    return HttpResponse.json(responseError);
+  }
+);
+
+const server = setupServer();
+
+beforeAll(() => {
+  server.listen();
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
+
 describe('testing CardList', () => {
-  const handler = [
-    http.get(`${BASE_URL}&s=${testRequest}&page=${mockPage}`, async () => {
-      return HttpResponse.json(testMoviesResponse);
-    }),
-  ];
-
-  const server = setupServer(...handler);
-
-  beforeAll(() => {
-    server.listen();
-  });
-
-  afterEach(() => {
-    server.resetHandlers();
-  });
-
-  afterAll(() => {
-    server.close();
-  });
-
   it('testing the number of cards, should be 10', async () => {
+    server.use(successResponse);
     render(
       <BrowserRouter>
         <Provider store={store}>
@@ -53,34 +66,9 @@ describe('testing CardList', () => {
       expect(screen.getAllByText('Super Men')).toHaveLength(10);
     });
   });
-});
-
-describe('testing CardList if movie not found', () => {
-  const responseError = { Error: 'Movie not found!' };
-
-  const requestError = 'ewjrjdi';
-
-  const handler = [
-    http.get(`${BASE_URL}&s=${requestError}&page=${mockPage}`, async () => {
-      return HttpResponse.json(responseError);
-    }),
-  ];
-
-  const serverError = setupServer(...handler);
-
-  beforeAll(() => {
-    serverError.listen();
-  });
-
-  afterEach(() => {
-    serverError.resetHandlers();
-  });
-
-  afterAll(() => {
-    serverError.close();
-  });
 
   it('testing error', async () => {
+    server.use(errorResponse);
     render(
       <BrowserRouter>
         <Provider store={store}>
