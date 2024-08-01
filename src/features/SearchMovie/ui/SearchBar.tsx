@@ -1,15 +1,10 @@
-import { ChangeEvent, FC } from 'react';
-import { Link } from 'react-router-dom';
-import { Paths } from 'shared/types';
-import { useLocalStorage } from 'shared/lib/hooks';
+import { ChangeEvent, FC, useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from './SearchBar.module.css';
 
-interface Props {
-  onClickCheck: (request: string) => void;
-}
-
-export const SearchBar: FC<Props> = ({ onClickCheck }) => {
-  const [request, setRequest] = useLocalStorage();
+export const SearchBar: FC = () => {
+  const [request, setRequest] = useState('');
+  const router = useRouter();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const title = event.target.value;
@@ -17,13 +12,16 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
   };
 
   const onClick = (): void => {
-    const title = request.trim();
-    onClickCheck(title);
+    const title = request !== '' ? request.trim() : 'search';
+    router.push({
+      pathname: '/[search]/[[...page]]',
+      query: { search: title, page: ['1'] },
+    });
   };
 
   return (
     <>
-      <h1>Movies</h1>
+      <h1 className={styles.titleApp}>Movies</h1>
       <form className={styles.searchBar}>
         <input
           type="search"
@@ -32,15 +30,13 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
           placeholder="Enter the movie title"
           onChange={(event) => onChange(event)}
         ></input>
-        <Link to={`/${Paths.search}${1}`}>
-          <button
-            className={`button ${styles.buttonSearch}`}
-            onClick={onClick}
-            type="button"
-          >
-            Search
-          </button>
-        </Link>
+        <button
+          className={`button ${styles.buttonSearch}`}
+          onClick={onClick}
+          type="button"
+        >
+          Search
+        </button>
       </form>
     </>
   );

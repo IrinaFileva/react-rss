@@ -1,3 +1,10 @@
+.titleApp {
+  height: 62px;
+  color: var(--text-color);
+  font-size: 64px;
+  font-family: inherit;
+}
+
 .searchBar {
   display: flex;
   justify-content: center;
@@ -17,6 +24,7 @@
 
 .buttonSearch {
   height: 3rem;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .searchInput::-webkit-search-cancel-button {
