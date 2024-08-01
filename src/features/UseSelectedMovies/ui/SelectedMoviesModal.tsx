@@ -3,7 +3,7 @@ import { clearStateMovies, getSelectedMovies } from 'entities/SelectedMovies';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
 import { getItemsForCsv } from 'shared/lib/changeData';
 import { Movie } from 'shared/types';
-import './SelectedMoviesModal.css';
+import styles from './SelectedMoviesModal.module.css';
 
 export const SelectedMoviesModal: FC = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +12,7 @@ export const SelectedMoviesModal: FC = () => {
 
   useEffect(() => {
     if (selectedMovies.length > 0) {
-      setIsOpen('modal_open');
+      setIsOpen(styles.modalOpen);
     } else {
       setIsOpen('');
     }
@@ -23,19 +23,19 @@ export const SelectedMoviesModal: FC = () => {
   return (
     <>
       {selectedMovies.length > 0 && (
-        <div className={`modal ${isOpen}`}>
+        <div className={`${styles.modal} ${isOpen}`}>
           <button
-            className="unselect"
+            className={styles.unselect}
             type="button"
             onClick={() => dispatch(clearStateMovies())}
           >
             Unselect all &#10060;
           </button>
-          <p className="modal_description">
+          <p className={styles.modalDescription}>
             {`Selected ${selectedMovies.length} movies`}
           </p>
           <a
-            className="download"
+            className={styles.download}
             href={getItemsForCsv(selectedMovies)}
             download={`${selectedMovies.length}_movies.csv`}
           >

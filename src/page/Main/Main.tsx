@@ -5,7 +5,6 @@ import { SearchBar } from 'features/SearchMovie';
 import { useLocalStorage, useTheme } from 'shared/lib/hooks';
 import { SelectedMoviesModal } from 'features/UseSelectedMovies';
 import { ButtonTheme } from 'features/ChangeApplicationTheme';
-import './Main.css';
 
 export const Main: FC = () => {
   const [request, setRequest] = useLocalStorage();

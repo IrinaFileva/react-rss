@@ -6,7 +6,7 @@ import { Movie, Paths } from 'shared/types';
 import { Spinner } from 'shared/lib/ui/Spinner';
 import { useGetMoviesQuery } from 'shared/lib/api';
 import { INITIAL_REQUEST } from 'shared/constants';
-import './MoviesCardList.css';
+import styles from './MoviesCardList.module.css';
 
 interface MovieCardListProps {
   request: string;
@@ -23,7 +23,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
   });
 
   return (
-    <main className="mainHomePage">
+    <main className={styles.mainHomePage}>
       {isFetching ? (
         <Spinner />
       ) : data && !data.Error ? (
@@ -33,7 +33,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
             activePage={activePage}
           />
           <div
-            className="characterCardList"
+            className={styles.characterCardList}
             data-testid="list"
             onClick={() => navigate(`/${Paths.search}${page}`)}
           >
@@ -44,7 +44,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
           </div>
         </>
       ) : (
-        <h2 className="noMovies">{data && data.Error}</h2>
+        <h2 className={styles.noMovies}>{data && data.Error}</h2>
       )}
     </main>
   );

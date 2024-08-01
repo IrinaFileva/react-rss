@@ -17,6 +17,7 @@
 }
 
 .noMovies {
+  color: var(--text-color);
   font-size: 52px;
   padding: 10%;
   backdrop-filter: blur(20px);

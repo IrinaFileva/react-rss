@@ -7,7 +7,7 @@ import {
   deleteMovie,
   getSelectedMovies,
 } from 'entities/SelectedMovies';
-import './MovieCard.css';
+import styles from './MovieCard.module.css';
 
 interface MovieCardProps {
   movie: Movie;
@@ -36,25 +36,25 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
 
   return (
     <NavLink
-      className="movieCard card"
+      className={styles.movieCard}
       data-testid={movie.imdbID}
       onClick={(e) => e.stopPropagation()}
       to={`${Paths.details}${movie.imdbID}`}
     >
       <img
-        className="movieCard_image card"
+        className={styles.movieCardImage}
         src={movie.Poster}
         alt={movie.Poster}
       ></img>
-      <h2 className="movieCard_title card">{movie.Title}</h2>
-      <p className="movieCard_info card">
+      <h2 className={styles.movieCardTitle}>{movie.Title}</h2>
+      <p className={styles.movieCardInfo}>
         {movie.Type} {movie.Year}
       </p>
       <input
         onClick={(e) => e.stopPropagation()}
         checked={isChecked}
         onChange={() => setChecked(!isChecked)}
-        className="movieCard_checkbox"
+        className={styles.movieCardCheckbox}
         type="checkbox"
       ></input>
     </NavLink>

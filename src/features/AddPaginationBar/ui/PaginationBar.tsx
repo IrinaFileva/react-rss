@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
 import { Paths } from 'shared/types';
-import './PaginationBar.css';
+import styles from './PaginationBar.module.css';
 
 interface PaginationProps {
   totalResults: string | undefined;
@@ -39,24 +39,24 @@ export const PaginationBar: FC<PaginationProps> = ({
 
   return (
     totalResults && (
-      <div className="paginationBar">
+      <div className={styles.paginationBar}>
         <button
-          className="paginationButton"
+          className={styles.paginationButton}
           onClick={onClickPrev}
           disabled={+shift <= 0}
         >
           &#9668; prev 10
         </button>
-        <div className="paginationWindow">
+        <div className={styles.paginationWindow}>
           <div
-            className="pagination"
+            className={styles.pagination}
             style={{ marginLeft: `-${shift}px` }}
             data-testid={'15'}
           >
             {countPage.map((page: string, index: number) => (
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'page activePage' : 'page'
+                  isActive ? `${styles.page} ${styles.activePage}` : styles.page
                 }
                 key={index}
                 to={`/${Paths.search}${page}`}
@@ -71,7 +71,7 @@ export const PaginationBar: FC<PaginationProps> = ({
           disabled={
             Math.floor(countPage.length / limitMoviesOnPage) <= countClick
           }
-          className="paginationButton"
+          className={styles.paginationButton}
         >
           next 10 &#9658;
         </button>

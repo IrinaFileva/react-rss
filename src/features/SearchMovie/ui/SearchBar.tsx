@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Paths } from 'shared/types';
 import { useLocalStorage } from 'shared/lib/hooks';
-import './SearchBar.css';
+import styles from './SearchBar.module.css';
 
 interface Props {
   onClickCheck: (request: string) => void;
@@ -24,17 +24,17 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
   return (
     <>
       <h1>Movies</h1>
-      <form className="searchBar">
+      <form className={styles.searchBar}>
         <input
           type="search"
           value={request ? request : ''}
-          className="searchInput"
+          className={styles.searchInput}
           placeholder="Enter the movie title"
           onChange={(event) => onChange(event)}
         ></input>
         <Link to={`/${Paths.search}${1}`}>
           <button
-            className="button buttonSearch"
+            className={`button ${styles.buttonSearch}`}
             onClick={onClick}
             type="button"
           >
