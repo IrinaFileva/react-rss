@@ -1,23 +1,20 @@
-import { BrowserRouter } from 'react-router-dom';
 import { MovieCard } from './MovieCard';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from 'app/providers/storeProvider/config/store';
 import { testMovie } from 'shared/test';
+import userEvent from '@testing-library/user-event';
+import mockRouter from 'next-router-mock';
+import { Paths } from 'shared/types';
 
 describe('testing Card', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
+  mockRouter.push(Paths.startPath);
 
   it('testing incoming data', () => {
     const { getByText, getByAltText } = render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <MovieCard movie={testMovie} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MovieCard movie={testMovie} />
+      </Provider>
     );
     const title = getByText(testMovie.Title);
     expect(title).toBeInTheDocument();
@@ -31,17 +28,37 @@ describe('testing Card', () => {
 
   it('testing clicking card opens a detailed card component', async () => {
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <MovieCard movie={testMovie} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MovieCard movie={testMovie} />
+      </Provider>
     );
 
-    const card = getByTestId('123456');
+    const card = getByTestId(testMovie.imdbID);
     expect(card).toBeInTheDocument();
+
     await userEvent.click(card);
-    const url = `/details/${testMovie.imdbID}`;
-    expect(location.pathname).toBe(url);
+
+    expect(mockRouter).toMatchObject({
+      pathname: Paths.basePath,
+      query: {
+        page: ['1', Paths.detailsParams, testMovie.imdbID],
+      },
+    });
+  });
+
+  it('testing feature selection', () => {
+    const { getByRole } = render(
+      <Provider store={store}>
+        <MovieCard movie={testMovie} />
+      </Provider>
+    );
+    const input = getByRole('checkbox');
+    expect(input).toBeInTheDocument();
+
+    act(() => input.click());
+    expect(input).toBeChecked();
+
+    act(() => input.click());
+    expect(input).not.toBeChecked();
   });
 });

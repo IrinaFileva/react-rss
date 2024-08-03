@@ -1,31 +1,47 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
-import { KEY_LS } from 'shared/constants';
-import { Provider } from 'react-redux';
-import { store } from 'app/providers/storeProvider';
+import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
+import { Paths } from 'shared/types';
+
+const testValue = 'testValue';
 
 describe('testing SearchBar', () => {
-  const testLSValue = 'testValue';
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 
-  render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <SearchBar
-          onClickCheck={() => localStorage.setItem(KEY_LS, testLSValue)}
-        />
-      </Provider>
-    </BrowserRouter>
-  );
+  it('testing useRouter hook', async () => {
+    mockRouter.push(Paths.startPath);
 
-  test('testing saving value to local storage', async () => {
-    const searchButton = screen.getByRole('button');
-    await userEvent.click(searchButton);
-    const currentLSValue = localStorage.getItem(KEY_LS);
+    render(<SearchBar />);
+
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+
     const searchInput = screen.getByPlaceholderText('Enter the movie title');
+    expect(searchInput).toBeInTheDocument();
+
+    await userEvent.type(searchInput, testValue);
+    await userEvent.click(button);
+
+    expect(mockRouter).toMatchObject({
+      pathname: Paths.basePath,
+      query: {
+        search: testValue,
+        page: ['1'],
+      },
+    });
+
     await userEvent.clear(searchInput);
-    await userEvent.type(searchInput, testLSValue);
-    expect(currentLSValue).toEqual(testLSValue);
+    await userEvent.click(button);
+
+    expect(mockRouter).toMatchObject({
+      pathname: Paths.basePath,
+      query: {
+        search: Paths.searchParams,
+        page: ['1'],
+      },
+    });
   });
 });

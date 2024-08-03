@@ -5,15 +5,7 @@ import {
   deleteMovie,
   selectedMovieSlice,
 } from './selectedMoviesSlices';
-import { Movie } from 'shared/types';
-
-const testMovie: Movie = {
-  Poster: 'https://www.kinopoisk.ru/picture/2836590/',
-  Title: 'Super Men',
-  Type: 'movie',
-  Year: 1978,
-  imdbID: '123456',
-};
+import { testMovie } from 'shared/test';
 
 test('testing clear reducer', () => {
   const previousState: SelectedMovieSchema = {

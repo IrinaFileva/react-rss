@@ -1,13 +1,11 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { vi } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
 import { PaginationBar } from './PaginationBar';
+import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
+import { Paths } from 'shared/types';
 
-const testTotalCount = '50';
-const activePage = 1;
-const page1 = '/search/1';
-const page2 = '/search/2';
+const testTotalCount = '500';
 
 describe('testing Pagination Bar', () => {
   afterEach(() => {
@@ -15,11 +13,11 @@ describe('testing Pagination Bar', () => {
   });
 
   it('testing buttons pagination', async () => {
+    mockRouter.push(Paths.startPath);
     const { getByText } = render(
-      <BrowserRouter>
-        <PaginationBar totalResults={testTotalCount} activePage={activePage} />
-      </BrowserRouter>
+      <PaginationBar totalResults={testTotalCount} />
     );
+
     const firstItem = getByText(1);
     const secondItem = getByText(2);
 
@@ -27,9 +25,35 @@ describe('testing Pagination Bar', () => {
     expect(secondItem).toBeInTheDocument();
 
     await userEvent.click(secondItem);
-    expect(location.pathname).toBe(page2);
+    expect(mockRouter).toMatchObject({
+      query: {
+        page: ['2'],
+      },
+    });
 
     await userEvent.click(firstItem);
-    expect(location.pathname).toBe(page1);
+    expect(mockRouter).toMatchObject({
+      query: {
+        page: ['1'],
+      },
+    });
+  });
+
+  it('testing prev and next buttons', () => {
+    const { getByText } = render(
+      <PaginationBar totalResults={testTotalCount} />
+    );
+
+    const prevButton = getByText('◄ prev 10');
+    const nextButton = getByText('next 10 ►');
+
+    expect(prevButton).toBeInTheDocument();
+    expect(nextButton).toBeInTheDocument();
+
+    act(() => nextButton.click());
+    expect(prevButton).not.toBeDisabled();
+
+    act(() => prevButton.click());
+    expect(nextButton).not.toBeDisabled();
   });
 });
