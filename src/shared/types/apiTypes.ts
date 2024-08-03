@@ -2,6 +2,7 @@ export interface MovieResponse {
   Search: Movie[];
   totalResults: string;
   Error?: string;
+  movieById?: MovieById;
 }
 
 export interface Movie {
