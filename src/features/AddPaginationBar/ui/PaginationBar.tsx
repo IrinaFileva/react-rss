@@ -1,26 +1,24 @@
 import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
-import { Paths } from 'shared/types';
+import { useRouter } from 'next/router';
 import styles from './PaginationBar.module.css';
+import { Paths } from 'shared/types';
 
 interface PaginationProps {
-  totalResults: string | undefined;
-  activePage: number;
+  totalResults: string;
 }
 
-export const PaginationBar: FC<PaginationProps> = ({
-  totalResults,
-  activePage,
-}) => {
+export const PaginationBar: FC<PaginationProps> = ({ totalResults }) => {
   const offsetPagination = 370;
   const limitMoviesOnPage = 10;
   const [shift, addShist] = useState<number>(0);
   const [countClick, setClick] = useState<number>(0);
   const countPage: string[] = getPageCount(totalResults);
+  const router = useRouter();
+  const activePage = router.query.page ? router.query.page[0] : '1';
 
   const countStart: number =
-    getSomePagination(countPage, limitMoviesOnPage, activePage) *
+    getSomePagination(countPage, limitMoviesOnPage, +activePage) *
     offsetPagination;
 
   useEffect(() => {
@@ -37,6 +35,16 @@ export const PaginationBar: FC<PaginationProps> = ({
     setClick(countClick + 1);
   };
 
+  const onClick = (page: string): void => {
+    router.push({
+      pathname: Paths.basePath,
+      query: {
+        search: router.query.search,
+        page: [page],
+      },
+    });
+  };
+
   return (
     totalResults && (
       <div className={styles.paginationBar}>
@@ -51,18 +59,20 @@ export const PaginationBar: FC<PaginationProps> = ({
           <div
             className={styles.pagination}
             style={{ marginLeft: `-${shift}px` }}
-            data-testid={'15'}
+            data-testid={shift}
           >
             {countPage.map((page: string, index: number) => (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? `${styles.page} ${styles.activePage}` : styles.page
+              <button
+                className={
+                  +activePage === index + 1
+                    ? `${styles.page} ${styles.activePage}`
+                    : styles.page
                 }
                 key={index}
-                to={`/${Paths.search}${page}`}
+                onClick={() => onClick(page)}
               >
                 {page}
-              </NavLink>
+              </button>
             ))}
           </div>
         </div>

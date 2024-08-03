@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
 import { Movie, Paths } from 'shared/types';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
+import { useRouter } from 'next/router';
 import {
   addMovie,
   deleteMovie,
@@ -15,31 +15,35 @@ interface MovieCardProps {
 
 export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const page = router.query.page ? router.query.page[0] : '1';
+  const newParams: string[] = [page, Paths.detailsParams, movie.imdbID];
   const selectedMovies = useAppSelector(getSelectedMovies);
-  const [isChecked, setChecked] = useState<boolean>(
-    selectedMovies.includes(movie)
-  );
+  const isChecked = selectedMovies.some((m) => m.imdbID === movie.imdbID);
 
-  useEffect(() => {
-    if (selectedMovies.length <= 0) {
-      setChecked(false);
-    }
-  }, [selectedMovies]);
-
-  useEffect(() => {
-    if (isChecked) {
+  const toggleMovies = () => {
+    if (!isChecked) {
       dispatch(addMovie(movie));
     } else {
       dispatch(deleteMovie(movie));
     }
-  }, [isChecked, dispatch, movie]);
+  };
+
+  const onClickCard = () => {
+    router.push({
+      pathname: Paths.basePath,
+      query: { search: router.query.search, page: newParams },
+    });
+  };
 
   return (
-    <NavLink
+    <div
       className={styles.movieCard}
       data-testid={movie.imdbID}
-      onClick={(e) => e.stopPropagation()}
-      to={`${Paths.details}${movie.imdbID}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClickCard();
+      }}
     >
       <img
         className={styles.movieCardImage}
@@ -51,12 +55,14 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         {movie.Type} {movie.Year}
       </p>
       <input
-        onClick={(e) => e.stopPropagation()}
-        checked={isChecked}
-        onChange={() => setChecked(!isChecked)}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleMovies();
+        }}
+        defaultChecked={isChecked}
         className={styles.movieCardCheckbox}
         type="checkbox"
       ></input>
-    </NavLink>
+    </div>
   );
 };

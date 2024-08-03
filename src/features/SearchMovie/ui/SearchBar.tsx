@@ -1,9 +1,10 @@
 import { ChangeEvent, FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './SearchBar.module.css';
+import { Paths } from 'shared/types';
 
 export const SearchBar: FC = () => {
-  const [request, setRequest] = useState('');
+  const [request, setRequest] = useState<string>(Paths.searchParams);
   const router = useRouter();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -12,9 +13,9 @@ export const SearchBar: FC = () => {
   };
 
   const onClick = (): void => {
-    const title = request !== '' ? request.trim() : 'search';
+    const title = request !== '' ? request.trim() : Paths.searchParams;
     router.push({
-      pathname: '/[search]/[[...page]]',
+      pathname: Paths.basePath,
       query: { search: title, page: ['1'] },
     });
   };
@@ -25,7 +26,7 @@ export const SearchBar: FC = () => {
       <form className={styles.searchBar}>
         <input
           type="search"
-          value={request ? request : ''}
+          value={request && request !== Paths.searchParams ? request : ''}
           className={styles.searchInput}
           placeholder="Enter the movie title"
           onChange={(event) => onChange(event)}
