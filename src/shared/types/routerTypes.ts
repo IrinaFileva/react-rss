@@ -1,7 +1,4 @@
 export enum Paths {
-  main = '/',
-  search = 'search/',
-  details = 'details/',
-  page = ':page',
-  id = ':id',
+  startPath = '/search/1',
+  pageParams = 'page=',
 }
