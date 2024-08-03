@@ -10,13 +10,13 @@ export const ButtonTheme: FC = () => {
     <label id="switch" className={styles.switch}>
       <input
         type="checkbox"
-        checked={theme === Theme.LIGHT ? true : false}
-        onChange={() => {
+        defaultChecked={theme === Theme.LIGHT ? true : false}
+        onClick={() => {
           toggleTheme();
         }}
         id="slider"
       ></input>
-      <span className={`${styles.slider} ${styles.round}`}></span>
+      <span className={`${styles.slider} ${styles.round}`}>{theme}</span>
     </label>
   );
 };
