@@ -4,6 +4,8 @@ import { PaginationBar } from 'features/AddPaginationBar';
 import { Movie, MovieResponse, Paths } from 'shared/types';
 import styles from './MoviesCardList.module.css';
 import { useRouter } from 'next/router';
+import { usePageLoading } from 'shared/lib/hooks';
+import { Spinner } from 'shared/lib/ui/Spinner';
 
 interface MovieCardListProps {
   data: MovieResponse | undefined;
@@ -11,7 +13,10 @@ interface MovieCardListProps {
 
 export const MovieCardList: FC<MovieCardListProps> = ({ data }) => {
   const router = useRouter();
+  const { isPageLoading } = usePageLoading();
   const page = router.query.page ? router.query.page[0] : '1';
+
+  if (isPageLoading && !data?.movieById) return <Spinner />;
 
   return (
     <main className={styles.mainHomePage}>
