@@ -4,4 +4,5 @@ export {
   testMovieById,
   testMoviesResponse,
   testResponseError,
+  testMoviesResponseById,
 } from './mockData';

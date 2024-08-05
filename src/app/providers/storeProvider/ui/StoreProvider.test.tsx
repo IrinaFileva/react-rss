@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { SearchBar } from 'features/SearchMovie';
-import { StoreProvider } from './StoreProvider';
+import { StoreProvider } from './storeProvider';
 
 describe('testing storeProvider', () => {
   it('testing children', () => {

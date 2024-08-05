@@ -30,3 +30,9 @@ export const testResponseError: MovieResponse = {
   Search: [],
   totalResults: '0',
 };
+
+export const testMoviesResponseById: MovieResponse = {
+  Search: testMovies,
+  totalResults: '300',
+  movieById: testMovieById,
+};

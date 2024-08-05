@@ -1,28 +1,11 @@
 import { render } from '@testing-library/react';
-import { testMovies } from '../mockData';
-import { MovieById, MovieResponse } from 'shared/types';
-import { Context } from 'vm';
+import { testMovieById, testMoviesResponseById } from '../mockData';
 import MainPage, { getServerSideProps } from 'pages/[search]/[[...page]]';
+import { Context } from 'vm';
 import { StoreProvider } from 'app/providers/storeProvider';
 import { BASE_URL } from 'shared/constants';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-
-const mockData: MovieById = {
-  Poster: 'https://www.kinopoisk.ru/picture/2836590/',
-  Title: 'Super Men',
-  Type: 'movie',
-  Year: '1978',
-  Actors: 'Ivan',
-  Director: 'Vova',
-  Plot: 'Super',
-};
-
-const testMoviesResponse: MovieResponse = {
-  Search: testMovies,
-  totalResults: '300',
-  movieById: mockData,
-};
 
 const mockCxt: Context = {
   params: {
@@ -32,11 +15,11 @@ const mockCxt: Context = {
 };
 
 const notId = http.get(`${BASE_URL}&s=Men&page=12`, async () => {
-  return HttpResponse.json(testMoviesResponse);
+  return HttpResponse.json(testMoviesResponseById);
 });
 
 const withId = http.get(`${BASE_URL}&i=tt1285016&plot=short`, async () => {
-  return HttpResponse.json(mockData);
+  return HttpResponse.json(testMovieById);
 });
 
 const server = setupServer();
@@ -53,7 +36,7 @@ afterAll(() => {
 it('testing display page', async () => {
   const { getByText } = render(
     <StoreProvider>
-      <MainPage {...testMoviesResponse} />
+      <MainPage {...testMoviesResponseById} />
     </StoreProvider>
   );
 
@@ -63,7 +46,7 @@ it('testing display page', async () => {
   server.use(notId, withId);
 
   const result = await getServerSideProps(mockCxt);
-  expect(result.props).toStrictEqual(testMoviesResponse);
+  expect(result.props).toStrictEqual(testMoviesResponseById);
 
   const button = getByText(/Close/);
   expect(button).toBeInTheDocument();

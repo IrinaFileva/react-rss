@@ -1,4 +1,4 @@
-export { StoreProvider } from './ui/StoreProvider';
+export { StoreProvider } from './ui/storeProvider';
 
 export { store } from './config/store';
 

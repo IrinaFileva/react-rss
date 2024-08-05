@@ -3,7 +3,7 @@ import { MovieCardList } from './MoviesCardList';
 import { StoreProvider } from 'app/providers/storeProvider';
 import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
-import { testMoviesResponse, testResponseError } from 'shared/test';
+import { testMoviesResponseById, testResponseError } from 'shared/test';
 import { Paths } from 'shared/types';
 
 describe('testing CardList', () => {
@@ -16,7 +16,7 @@ describe('testing CardList', () => {
 
     const { getAllByRole, getByTestId } = render(
       <StoreProvider>
-        <MovieCardList data={testMoviesResponse} />
+        <MovieCardList data={testMoviesResponseById} />
       </StoreProvider>
     );
 
