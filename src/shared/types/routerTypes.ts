@@ -4,4 +4,5 @@ export enum Paths {
   basePath = '/[search]/[[...page]]',
   searchParams = 'search',
   detailsParams = 'details',
+  errorPaths = '[search][[...page]]',
 }

@@ -8,11 +8,11 @@ import './../app/styles/global.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const isSearch = router.query.search === Paths.errorPaths;
 
   useEffect(() => {
-    if (router.query.page && router.query.page[0] === Paths.pageParams)
-      router.push(Paths.startPath);
-  }, [router]);
+    if (isSearch) router.push(Paths.startPath);
+  }, [router, isSearch]);
 
   return (
     <StoreProvider>
