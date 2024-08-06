@@ -5,4 +5,5 @@ export {
   testMoviesResponse,
   testResponseError,
   testMoviesResponseById,
+  mockPathRequest,
 } from './mockData';

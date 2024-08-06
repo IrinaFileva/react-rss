@@ -8,6 +8,8 @@ export const testMovie: Movie = {
   Poster: 'https://www.kinopoisk.ru/picture/2836590/',
 };
 
+export const mockPathRequest = 'http://www.omdbapi.com/';
+
 export const testMovies: Movie[] = new Array(10).fill(testMovie);
 
 export const testMovieById: MovieById = {

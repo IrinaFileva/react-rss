@@ -1,9 +1,12 @@
 import { render } from '@testing-library/react';
-import { testMovieById, testMoviesResponseById } from '../mockData';
+import {
+  mockPathRequest,
+  testMovieById,
+  testMoviesResponseById,
+} from '../mockData';
 import MainPage, { getServerSideProps } from 'pages/[search]/[[...page]]';
 import { Context } from 'vm';
 import { StoreProvider } from 'app/providers/storeProvider';
-import { BASE_URL } from 'shared/constants';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
@@ -14,11 +17,13 @@ const mockCxt: Context = {
   },
 };
 
-const notId = http.get(`${BASE_URL}&s=Men&page=12`, async () => {
+const notId = http.get(mockPathRequest, ({ request }) => {
+  new URL(request.url).searchParams;
   return HttpResponse.json(testMoviesResponseById);
 });
 
-const withId = http.get(`${BASE_URL}&i=tt1285016&plot=short`, async () => {
+const withId = http.get(mockPathRequest, ({ request }) => {
+  new URL(request.url).searchParams;
   return HttpResponse.json(testMovieById);
 });
 
