@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './SearchBar.module.css';
 import { Paths } from 'shared/types';
@@ -6,6 +6,11 @@ import { Paths } from 'shared/types';
 export const SearchBar: FC = () => {
   const [request, setRequest] = useState<string>(Paths.searchParams);
   const router = useRouter();
+  const isSearch = router.asPath === Paths.errorPaths;
+
+  useEffect(() => {
+    if (isSearch) router.push(Paths.startPath);
+  }, [router, isSearch]);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const title = event.target.value;

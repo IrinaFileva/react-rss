@@ -17,7 +17,7 @@ export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
   return (
     movie && (
       <div className={styles.movieID}>
-        {isPageLoading ? (
+        {isPageLoading && !movie.Error ? (
           <Spinner />
         ) : (
           <>
@@ -35,25 +35,30 @@ export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
             >
               Close
             </button>
-            <img
-              className={styles.movieIDImg}
-              src={movie.Poster}
-              alt={movie.Poster}
-            ></img>
-            <h2>{movie.Title}</h2>
-            <h3>{movie.Type}</h3>
-            <p>{movie.Plot}</p>
-            <p className={styles.movieIDActors}>
-              <span>{TeamMovie.actors}</span>
-              <br></br>
-              {movie.Actors}
-            </p>
-            <p className={styles.movieIDActors}>
-              <span>{TeamMovie.director}</span>
-              <br></br>
-              {movie.Director}
-            </p>
-            <h3>{movie.Year}</h3>
+            {movie.Error && <h2 className={styles.noMovies}>{movie.Error}</h2>}
+            {!movie.Error && (
+              <>
+                <img
+                  className={styles.movieIDImg}
+                  src={movie.Poster}
+                  alt={movie.Poster}
+                ></img>
+                <h2>{movie.Title}</h2>
+                <h3>{movie.Type}</h3>
+                <p>{movie.Plot}</p>
+                <p className={styles.movieIDActors}>
+                  <span>{TeamMovie.actors}</span>
+                  <br></br>
+                  {movie.Actors}
+                </p>
+                <p className={styles.movieIDActors}>
+                  <span>{TeamMovie.director}</span>
+                  <br></br>
+                  {movie.Director}
+                </p>
+                <h3>{movie.Year}</h3>
+              </>
+            )}
           </>
         )}
       </div>

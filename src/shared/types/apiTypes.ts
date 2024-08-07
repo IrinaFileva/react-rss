@@ -21,6 +21,7 @@ export interface MovieById {
   Director: string;
   Type: string;
   Year: string;
+  Error?: string;
 }
 
 export enum TeamMovie {
