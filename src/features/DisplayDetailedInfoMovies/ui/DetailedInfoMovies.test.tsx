@@ -1,10 +1,28 @@
-import { StoreProvider } from 'app/providers/storeProvider';
-import { DetailedInfoMovies } from './DetailedInfoMovies';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import StoreProvider from 'app/StoreProvider';
 import mockRouter from 'next-router-mock';
 import { testMovieById } from 'shared/test';
-import { Paths } from 'shared/types';
+import DetailedInfoMovies from './DetailedInfoMovies';
+
+vi.mock('next/navigation', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('next/navigation')>();
+  const { useRouter } =
+    await vi.importActual<typeof import('next-router-mock')>(
+      'next-router-mock'
+    );
+  const useParams = vi.fn().mockImplementation(() => {
+    return {
+      search: 'search',
+      page: ['1', 'details', '123456'],
+    };
+  });
+  return {
+    ...actual,
+    useRouter: vi.fn().mockImplementation(useRouter),
+    useParams,
+  };
+});
 
 describe('testing CardList', () => {
   afterEach(() => {
@@ -12,8 +30,6 @@ describe('testing CardList', () => {
   });
 
   it('testing incoming data and routing', async () => {
-    mockRouter.push(Paths.startPath);
-
     const { getByText, getByAltText, getByRole } = render(
       <StoreProvider>
         <DetailedInfoMovies movie={testMovieById} />
@@ -46,9 +62,7 @@ describe('testing CardList', () => {
 
     await userEvent.click(button);
     expect(mockRouter).toMatchObject({
-      query: {
-        page: ['1'],
-      },
+      pathname: `/search/1`,
     });
   });
 });

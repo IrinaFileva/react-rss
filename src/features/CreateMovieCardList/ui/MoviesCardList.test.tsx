@@ -1,10 +1,9 @@
 import { render } from '@testing-library/react';
-import { MovieCardList } from './MoviesCardList';
-import { StoreProvider } from 'app/providers/storeProvider';
-import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
-import { testMoviesResponse, testResponseError } from 'shared/test';
-import { Paths } from 'shared/types';
+import { testMoviesResponseById, testResponseError } from 'shared/test';
+import StoreProvider from 'app/StoreProvider';
+import mockRouter from 'next-router-mock';
+import MovieCardList from './MoviesCardList';
 
 describe('testing CardList', () => {
   afterEach(() => {
@@ -12,11 +11,9 @@ describe('testing CardList', () => {
   });
 
   it('testing the number of cards, should be 10', async () => {
-    mockRouter.push(Paths.startPath);
-
     const { getAllByRole, getByTestId } = render(
       <StoreProvider>
-        <MovieCardList data={testMoviesResponse} />
+        <MovieCardList data={testMoviesResponseById} />
       </StoreProvider>
     );
 
@@ -28,18 +25,12 @@ describe('testing CardList', () => {
 
     await userEvent.click(div);
     expect(mockRouter).toMatchObject({
-      query: {
-        page: ['1'],
-      },
+      pathname: '/search/1',
     });
   });
 
   it('testing messages when cards are missing', () => {
-    const { getByText } = render(
-      <StoreProvider>
-        <MovieCardList data={testResponseError} />
-      </StoreProvider>
-    );
+    const { getByText } = render(<MovieCardList data={testResponseError} />);
 
     const text = getByText(/Oops/);
     expect(text).toBeInTheDocument();

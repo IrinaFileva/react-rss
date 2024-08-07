@@ -13,8 +13,12 @@ interface LayoutProps {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <StoreProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </StoreProvider>
+    <html lang="en">
+      <body>
+        <StoreProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }

@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useState } from 'react';
-
 import styles from './SearchBar.module.css';
 import { Paths } from 'shared/types';
 import { useRouter } from 'next/navigation';

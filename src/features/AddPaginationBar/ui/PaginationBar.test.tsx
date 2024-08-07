@@ -3,7 +3,6 @@ import { vi } from 'vitest';
 import { PaginationBar } from './PaginationBar';
 import mockRouter from 'next-router-mock';
 import userEvent from '@testing-library/user-event';
-import { Paths } from 'shared/types';
 
 const testTotalCount = '500';
 
@@ -13,7 +12,6 @@ describe('testing Pagination Bar', () => {
   });
 
   it('testing buttons pagination', async () => {
-    mockRouter.push(Paths.startPath);
     const { getByText } = render(
       <PaginationBar totalResults={testTotalCount} />
     );
@@ -26,16 +24,7 @@ describe('testing Pagination Bar', () => {
 
     await userEvent.click(secondItem);
     expect(mockRouter).toMatchObject({
-      query: {
-        page: ['2'],
-      },
-    });
-
-    await userEvent.click(firstItem);
-    expect(mockRouter).toMatchObject({
-      query: {
-        page: ['1'],
-      },
+      pathname: `/search/2`,
     });
   });
 

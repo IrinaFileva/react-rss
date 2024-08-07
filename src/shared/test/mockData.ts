@@ -8,6 +8,8 @@ export const testMovie: Movie = {
   Poster: 'https://www.kinopoisk.ru/picture/2836590/',
 };
 
+export const mockPathRequest = 'http://www.omdbapi.com/';
+
 export const testMovies: Movie[] = new Array(10).fill(testMovie);
 
 export const testMovieById: MovieById = {
@@ -29,4 +31,10 @@ export const testResponseError: MovieResponse = {
   Error: 'Oops',
   Search: [],
   totalResults: '0',
+};
+
+export const testMoviesResponseById: MovieResponse = {
+  Search: testMovies,
+  totalResults: '300',
+  movieById: testMovieById,
 };
