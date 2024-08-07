@@ -41,8 +41,8 @@
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
     ".next/types/**/*.ts",
-    "./setupTests.ts"
-, "src/features/CreateMovieCardList/ui/MoviesCardList.test.tsx"  ],
+    "./setupTests.ts",
+   ],
   "exclude": [
     "./node_modules"
   ]
