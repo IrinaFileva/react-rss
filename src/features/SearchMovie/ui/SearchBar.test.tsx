@@ -26,22 +26,14 @@ describe('testing SearchBar', () => {
     await userEvent.click(button);
 
     expect(mockRouter).toMatchObject({
-      pathname: Paths.basePath,
-      query: {
-        search: testValue,
-        page: ['1'],
-      },
+      pathname: `/${testValue}/1`,
     });
 
     await userEvent.clear(searchInput);
     await userEvent.click(button);
 
     expect(mockRouter).toMatchObject({
-      pathname: Paths.basePath,
-      query: {
-        search: Paths.searchParams,
-        page: ['1'],
-      },
+      pathname: Paths.startPath,
     });
   });
 });

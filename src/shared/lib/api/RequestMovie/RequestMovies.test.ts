@@ -1,8 +1,11 @@
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
-import { BASE_URL } from 'shared/constants';
 import { requestMovies } from './RequestMovie';
-import { testMovieById, testMoviesResponse } from 'shared/test';
+import {
+  mockPathRequest,
+  testMovieById,
+  testMoviesResponse,
+} from 'shared/test';
 
 const mockPage = '12';
 
@@ -10,18 +13,15 @@ const mockTitle = 'Men';
 
 const mockId = 'tt1285016';
 
-const notId = http.get(
-  `${BASE_URL}&s=${mockTitle}&page=${mockPage}`,
-  async () => {
-    return HttpResponse.json(testMoviesResponse);
-  }
-);
+const notId = http.get(mockPathRequest, ({ request }) => {
+  new URL(request.url).searchParams;
+  return HttpResponse.json(testMoviesResponse);
+});
 
-const withId = [
-  http.get(`${BASE_URL}&i=${mockId}&plot=short`, async () => {
-    return HttpResponse.json(testMovieById);
-  }),
-];
+const withId = http.get(mockPathRequest, ({ request }) => {
+  new URL(request.url).searchParams;
+  return HttpResponse.json(testMovieById);
+});
 
 const server = setupServer();
 
@@ -33,6 +33,9 @@ afterAll(() => {
   server.close();
   vi.clearAllMocks();
 });
+beforeEach(() => {
+  server.resetHandlers();
+});
 
 test('testing requestMovies not id', async () => {
   server.use(notId);
@@ -41,6 +44,6 @@ test('testing requestMovies not id', async () => {
 });
 
 test('testing requestMovies with id', async () => {
-  server.use(...withId);
+  server.use(withId);
   await requestMovies(mockTitle, mockPage, mockId);
 });

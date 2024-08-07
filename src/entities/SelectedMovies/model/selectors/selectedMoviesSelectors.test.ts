@@ -1,4 +1,4 @@
-import { RootState } from 'app/providers/storeProvider';
+import { RootState } from '_app/providers/storeProvider';
 import { getSelectedMovies } from './selectedMoviesSelectors';
 import { testMovie } from 'shared/test';
 

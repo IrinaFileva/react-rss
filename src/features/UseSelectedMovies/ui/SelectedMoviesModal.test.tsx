@@ -1,9 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { SelectedMoviesModal } from './SelectedMoviesModal';
-import { store, StoreProvider } from 'app/providers/storeProvider';
 import { testMovie } from 'shared/test';
 import { addMovie } from 'entities/SelectedMovies';
 import { act } from 'react';
+import { makeStore } from '_app/providers/storeProvider';
+import { Provider } from 'react-redux';
+
+const store = makeStore();
 
 describe('testing SelectedMoviesModal', () => {
   afterEach(() => {
@@ -14,9 +17,9 @@ describe('testing SelectedMoviesModal', () => {
     store.dispatch(addMovie(testMovie));
 
     render(
-      <StoreProvider>
+      <Provider store={store}>
         <SelectedMoviesModal />
-      </StoreProvider>
+      </Provider>
     );
 
     const deleteButton = screen.getByText(/Unselect all/);
