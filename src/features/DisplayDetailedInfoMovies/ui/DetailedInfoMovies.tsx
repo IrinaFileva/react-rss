@@ -1,31 +1,35 @@
-import { FC } from 'react';
+'use client';
 import { MovieById, Paths, TeamMovie } from 'shared/types';
 import { useParams, useRouter } from 'next/navigation';
 import styles from './DetailedInfoMovies.module.css';
+import Image from 'next/image';
 
 interface DetailedInfoMoviesProps {
   movie: MovieById | undefined;
 }
 
-export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
+export default function DetailedInfoMovies({ movie }: DetailedInfoMoviesProps) {
   const router = useRouter();
   const params = useParams();
   const page = params.page ? params.page[0] : '1';
 
   return (
     movie && (
-      <div className={styles.movieID}>
+      <>
         <button
           className="button"
           onClick={() => router.push(`/${params[Paths.searchParams]}/${page}`)}
         >
           Close
         </button>
-        <img
+        <Image
           className={styles.movieIDImg}
           src={movie.Poster}
           alt={movie.Poster}
-        ></img>
+          width={220}
+          height={320}
+          priority={true}
+        ></Image>
         <h2>{movie.Title}</h2>
         <h3>{movie.Type}</h3>
         <p>{movie.Plot}</p>
@@ -40,7 +44,7 @@ export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
           {movie.Director}
         </p>
         <h3>{movie.Year}</h3>
-      </div>
+      </>
     )
   );
-};
+}

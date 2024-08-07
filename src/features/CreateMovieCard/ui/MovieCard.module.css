@@ -14,11 +14,6 @@
   cursor: pointer;
 }
 
-.movieCardImage {
-  width: 100%;
-  height: 230px;
-}
-
 .movieCardTitle {
   text-align: center;
   font-size: 18px;

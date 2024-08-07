@@ -1,4 +1,4 @@
-import { FC } from 'react';
+'use client';
 import { MovieCard } from 'features/CreateMovieCard';
 import { PaginationBar } from 'features/AddPaginationBar';
 import { Movie, MovieResponse, Paths } from 'shared/types';
@@ -9,7 +9,7 @@ interface MovieCardListProps {
   data: MovieResponse | undefined;
 }
 
-export const MovieCardList: FC<MovieCardListProps> = ({ data }) => {
+export default function MovieCardList({ data }: MovieCardListProps) {
   const router = useRouter();
   const params = useParams();
   const page = params.page ? params.page[0] : '1';
@@ -37,4 +37,4 @@ export const MovieCardList: FC<MovieCardListProps> = ({ data }) => {
       )}
     </main>
   );
-};
+}

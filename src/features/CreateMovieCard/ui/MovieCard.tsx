@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Movie, Paths } from 'shared/types';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
 import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import {
   addMovie,
   deleteMovie,
@@ -44,11 +45,14 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         onClickCard();
       }}
     >
-      <img
-        className={styles.movieCardImage}
+      {' '}
+      <Image
         src={movie.Poster}
         alt={movie.Poster}
-      ></img>
+        priority={true}
+        width={215}
+        height={230}
+      ></Image>
       <h2 className={styles.movieCardTitle}>{movie.Title}</h2>
       <p className={styles.movieCardInfo}>
         {movie.Type} {movie.Year}

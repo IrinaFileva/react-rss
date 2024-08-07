@@ -1,17 +1,18 @@
 'use client';
 import { useTheme } from 'shared/lib/hooks';
-import { MovieResponse, Paths } from 'shared/types';
+import { Paths } from 'shared/types';
 import { SearchBar } from 'features/SearchMovie';
 import { ButtonTheme } from 'features/ChangeApplicationTheme';
-import { MovieCardList } from 'features/CreateMovieCardList';
-import { DetailedInfoMovies } from 'features/DisplayDetailedInfoMovies';
 import { SelectedMoviesModal } from 'features/UseSelectedMovies';
 import { useParams, useRouter } from 'next/navigation';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './../_app/styles/main.module.css';
-import Loader from './loading';
 
-export default function MainPage(data: MovieResponse) {
+interface MainPageProps {
+  children: React.ReactNode;
+}
+
+export default function MainPage({ children }: MainPageProps) {
   const { theme } = useTheme();
   const router = useRouter();
   const params = useParams();
@@ -19,22 +20,15 @@ export default function MainPage(data: MovieResponse) {
 
   useEffect(() => {
     if (isPage) router.push(Paths.startPath);
-  }, [router]);
+  }, [router, isPage]);
 
   return (
     <div className={`${styles.mainPage} ${styles[theme]}`}>
-      <div className={styles.mainPage_noOutlet}>
-        <header className={styles.header}>
-          <SearchBar />
-          <ButtonTheme />
-        </header>
-        <Suspense fallback={<Loader />}>
-          <MovieCardList data={data} />
-        </Suspense>
-      </div>
-      <Suspense fallback={<Loader />}>
-        {data.movieById && <DetailedInfoMovies movie={data.movieById} />}
-      </Suspense>
+      <header className={styles.header}>
+        <SearchBar />
+        <ButtonTheme />
+      </header>
+      {children}
       <SelectedMoviesModal />
     </div>
   );
