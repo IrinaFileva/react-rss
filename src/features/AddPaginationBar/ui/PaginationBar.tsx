@@ -1,8 +1,9 @@
+'use client';
 import { FC, useEffect, useState } from 'react';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
-import { useRouter } from 'next/router';
 import styles from './PaginationBar.module.css';
 import { Paths } from 'shared/types';
+import { useParams, useRouter } from 'next/navigation';
 
 interface PaginationProps {
   totalResults: string;
@@ -15,7 +16,8 @@ export const PaginationBar: FC<PaginationProps> = ({ totalResults }) => {
   const [countClick, setClick] = useState<number>(0);
   const countPage: string[] = getPageCount(totalResults);
   const router = useRouter();
-  const activePage = router.query.page ? router.query.page[0] : '1';
+  const params = useParams();
+  const activePage = params.page ? params.page[0] : '1';
 
   const countStart: number =
     getSomePagination(countPage, limitMoviesOnPage, +activePage) *
@@ -36,13 +38,7 @@ export const PaginationBar: FC<PaginationProps> = ({ totalResults }) => {
   };
 
   const onClick = (page: string): void => {
-    router.push({
-      pathname: Paths.basePath,
-      query: {
-        search: router.query.search,
-        page: [page],
-      },
-    });
+    router.push(`/${params[Paths.searchParams]}/${page}`);
   };
 
   return (

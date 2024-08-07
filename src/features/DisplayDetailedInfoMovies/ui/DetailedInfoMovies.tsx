@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { MovieById, Paths, TeamMovie } from 'shared/types';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 import styles from './DetailedInfoMovies.module.css';
 
 interface DetailedInfoMoviesProps {
@@ -9,22 +9,15 @@ interface DetailedInfoMoviesProps {
 
 export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
   const router = useRouter();
-  const page = router.query.page ? router.query.page[0] : '1';
+  const params = useParams();
+  const page = params.page ? params.page[0] : '1';
 
   return (
     movie && (
       <div className={styles.movieID}>
         <button
           className="button"
-          onClick={() =>
-            router.push({
-              pathname: Paths.basePath,
-              query: {
-                search: router.query.search,
-                page: [page],
-              },
-            })
-          }
+          onClick={() => router.push(`/${params[Paths.searchParams]}/${page}`)}
         >
           Close
         </button>

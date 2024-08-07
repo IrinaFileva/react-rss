@@ -3,7 +3,7 @@ import { MovieCard } from 'features/CreateMovieCard';
 import { PaginationBar } from 'features/AddPaginationBar';
 import { Movie, MovieResponse, Paths } from 'shared/types';
 import styles from './MoviesCardList.module.css';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 
 interface MovieCardListProps {
   data: MovieResponse | undefined;
@@ -11,7 +11,8 @@ interface MovieCardListProps {
 
 export const MovieCardList: FC<MovieCardListProps> = ({ data }) => {
   const router = useRouter();
-  const page = router.query.page ? router.query.page[0] : '1';
+  const params = useParams();
+  const page = params.page ? params.page[0] : '1';
 
   return (
     <main className={styles.mainHomePage}>
@@ -22,13 +23,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({ data }) => {
             className={styles.characterCardList}
             data-testid="list"
             onClick={() =>
-              router.push({
-                pathname: Paths.basePath,
-                query: {
-                  search: router.query.search,
-                  page: [page],
-                },
-              })
+              router.push(`/${params[Paths.searchParams]}/${page}`)
             }
           >
             {data.Search &&

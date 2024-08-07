@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Movie, Paths } from 'shared/types';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 import {
   addMovie,
   deleteMovie,
@@ -16,8 +16,8 @@ interface MovieCardProps {
 export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const page = router.query.page ? router.query.page[0] : '1';
-  const newParams: string[] = [page, Paths.detailsParams, movie.imdbID];
+  const params = useParams();
+  const page = params.page ? params.page[0] : '1';
   const selectedMovies = useAppSelector(getSelectedMovies);
   const isChecked = selectedMovies.some((m) => m.imdbID === movie.imdbID);
 
@@ -30,10 +30,9 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   };
 
   const onClickCard = () => {
-    router.push({
-      pathname: Paths.basePath,
-      query: { search: router.query.search, page: newParams },
-    });
+    router.push(
+      `/${params[Paths.searchParams]}/${page}/${Paths.detailsParams}/${movie.imdbID}`
+    );
   };
 
   return (

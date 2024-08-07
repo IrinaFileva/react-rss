@@ -1,7 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
-import { useRouter } from 'next/router';
+
 import styles from './SearchBar.module.css';
 import { Paths } from 'shared/types';
+import { useRouter } from 'next/navigation';
 
 export const SearchBar: FC = () => {
   const [request, setRequest] = useState<string>(Paths.searchParams);
@@ -14,10 +15,7 @@ export const SearchBar: FC = () => {
 
   const onClick = (): void => {
     const title = request !== '' ? request.trim() : Paths.searchParams;
-    router.push({
-      pathname: Paths.basePath,
-      query: { search: title, page: ['1'] },
-    });
+    router.push(`/${title}/1`);
   };
 
   return (
