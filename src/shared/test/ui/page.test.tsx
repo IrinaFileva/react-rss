@@ -9,6 +9,6 @@ it('testing Page', async () => {
   const jsx = await Page({ params: { search: 'search', page: ['1'] } });
   render(<Provider store={store}>{jsx}</Provider>);
 
-  const text = screen.getByText(/dark/);
+  const text = screen.getByText(/Loading.../);
   expect(text).toBeInTheDocument();
 });

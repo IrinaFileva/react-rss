@@ -1,9 +1,8 @@
 import { requestMovies, requestMoviesById } from 'shared/lib/api';
-import MainPage from '../../main-page';
 import { Paths } from 'shared/types';
 import { lazy, Suspense } from 'react';
-import styles from './../../../_app/styles/main.module.css';
 import { Spinner } from 'shared/lib/ui/Spinner';
+import styles from './../../../_app/styles/main.module.css';
 
 interface PageProps {
   params: {
@@ -18,33 +17,31 @@ export default async function Page({ params: { search, page } }: PageProps) {
   const id = page[2] ? await requestMoviesById(page[2]) : null;
 
   const LazyList = lazy(
-    () => import('./../../../features/CreateMovieCardList/ui/MoviesCardList')
+    () => import('../../../features/CreateMovieCardList/ui/MoviesCardList')
   );
   const LazyMovies = lazy(
     () =>
       import(
-        './../../../features/DisplayDetailedInfoMovies/ui/DetailedInfoMovies'
+        '../../../features/DisplayDetailedInfoMovies/ui/DetailedInfoMovies'
       )
   );
 
   return (
-    <MainPage>
-      <div className={styles.mainPage_noOutlet}>
-        {!id ? (
-          <Suspense fallback={<Spinner />}>
-            <LazyList data={data} />
-          </Suspense>
-        ) : (
+    <div className={styles.mainPage_noOutlet}>
+      {!id ? (
+        <Suspense fallback={<Spinner />}>
           <LazyList data={data} />
-        )}
-        {id && (
-          <div className={styles.movieID}>
-            <Suspense fallback={<Spinner />}>
-              {<LazyMovies movie={id} />}
-            </Suspense>
-          </div>
-        )}
-      </div>
-    </MainPage>
+        </Suspense>
+      ) : (
+        <LazyList data={data} />
+      )}
+      {id && (
+        <div className={styles.movieID}>
+          <Suspense fallback={<Spinner />}>
+            {<LazyMovies movie={id} />}
+          </Suspense>
+        </div>
+      )}
+    </div>
   );
 }

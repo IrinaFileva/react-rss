@@ -9,6 +9,7 @@ import {
   getSelectedMovies,
 } from 'entities/SelectedMovies';
 import styles from './MovieCard.module.css';
+import { INITIAL_REQUEST } from 'shared/constants';
 
 interface MovieCardProps {
   movie: Movie;
@@ -18,7 +19,8 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const params = useParams();
-  const page = params.page ? params.page[0] : '1';
+  const page = params && params.page ? params.page[0] : '1';
+  const search = (params && params[Paths.searchParams]) || INITIAL_REQUEST;
   const selectedMovies = useAppSelector(getSelectedMovies);
   const isChecked = selectedMovies.some((m) => m.imdbID === movie.imdbID);
 
@@ -31,9 +33,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   };
 
   const onClickCard = () => {
-    router.push(
-      `/${params[Paths.searchParams]}/${page}/${Paths.detailsParams}/${movie.imdbID}`
-    );
+    router.push(`/${search}/${page}/${Paths.detailsParams}/${movie.imdbID}`);
   };
 
   return (

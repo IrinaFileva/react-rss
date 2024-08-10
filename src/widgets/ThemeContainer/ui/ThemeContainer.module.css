@@ -1,0 +1,24 @@
+.dark {
+  --bg-color: #030303;
+  --text-color: white;
+  --border-color: white;
+  --accent-color: #3f3e3e;
+  background: url('../../../shared/assets/starrySky.jpg');
+}
+
+.light {
+  --bg-color: white;
+  --text-color: black;
+  --border-color: black;
+  --accent-color: #b8dfe4;
+  background: url('../../../shared/assets/sky.jpg');
+}
+
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+  height: 100vh;
+  background-size: cover;
+}

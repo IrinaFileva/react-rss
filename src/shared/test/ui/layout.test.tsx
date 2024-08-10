@@ -1,11 +1,12 @@
 import { render } from '@testing-library/react';
-import { SearchBar } from 'features/SearchMovie';
 import RootLayout from 'app/layout';
+import MovieCardList from 'features/CreateMovieCardList/ui/MoviesCardList';
+import { testMoviesResponse } from '../mockData';
 
 it('testing RootLayout', () => {
   const { getByText } = render(
     <RootLayout>
-      <SearchBar />
+      <MovieCardList data={testMoviesResponse} />
     </RootLayout>
   );
   const text = getByText('Movies');

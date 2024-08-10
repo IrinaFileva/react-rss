@@ -2,6 +2,7 @@ import StoreProvider from './StoreProvider';
 import { ThemeProvider } from '_app/providers/themeProvider';
 import './../_app/styles/global.css';
 import { Metadata } from 'next';
+import { ThemeContainer } from 'widgets/ThemeContainer';
 
 export const metadata: Metadata = {
   title: 'Movies',
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en">
       <body>
         <StoreProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <ThemeContainer>{children}</ThemeContainer>
+          </ThemeProvider>
         </StoreProvider>
       </body>
     </html>

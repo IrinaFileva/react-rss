@@ -1,3 +1,4 @@
+'use client';
 import { FC, useEffect, useState } from 'react';
 import { clearStateMovies, getSelectedMovies } from 'entities/SelectedMovies';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
