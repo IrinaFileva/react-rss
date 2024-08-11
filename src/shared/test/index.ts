@@ -1,1 +1,7 @@
-export { testMovie, testMovies } from './mockData';
+export {
+  testMovie,
+  testMovies,
+  mockPathRequest,
+  testMovieById,
+  testMoviesResponse,
+} from './mockData';
