@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { KEY_LS_THEME } from 'shared/constants';
 import { Theme, ThemeContext } from 'shared/lib/theme';
 
 type UseThemeResult = {
@@ -23,7 +22,6 @@ export const useTheme = (): UseThemeResult => {
         newTheme = Theme.DARK;
     }
     if (setTheme) setTheme(newTheme);
-    localStorage.setItem(KEY_LS_THEME, newTheme);
   };
 
   return {
