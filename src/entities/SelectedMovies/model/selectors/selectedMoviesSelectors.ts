@@ -1,4 +1,4 @@
-import { RootState } from 'app/providers/storeProvider';
+import { RootState } from 'core/providers/storeProvider';
 import { Movie } from 'shared/types';
 
 export const getSelectedMovies = (state: RootState): Movie[] => {
