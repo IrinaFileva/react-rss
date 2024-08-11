@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styles from './DetailedInfoMovies.module.css';
 import { usePageLoading } from 'shared/lib/hooks';
 import { Spinner } from 'shared/lib/ui/Spinner';
+import Image from 'next/image';
 
 interface DetailedInfoMoviesProps {
   movie: MovieById | undefined;
@@ -38,11 +39,13 @@ export const DetailedInfoMovies: FC<DetailedInfoMoviesProps> = ({ movie }) => {
             {movie.Error && <h2 className={styles.noMovies}>{movie.Error}</h2>}
             {!movie.Error && (
               <>
-                <img
+                <Image
                   className={styles.movieIDImg}
                   src={movie.Poster}
                   alt={movie.Poster}
-                ></img>
+                  width={320}
+                  height={420}
+                />
                 <h2>{movie.Title}</h2>
                 <h3>{movie.Type}</h3>
                 <p>{movie.Plot}</p>
