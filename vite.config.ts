@@ -16,6 +16,10 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text'],
       exclude: [
+        '.next',
+        '.next/server',
+        '.next/static',
+        '.next/types',
         '**/**.test.tsx',
         '**/**.test.ts',
         '**/index.ts',

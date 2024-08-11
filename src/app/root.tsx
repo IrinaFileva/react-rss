@@ -11,7 +11,7 @@ import {
 } from '@remix-run/react';
 import { StoreProvider } from 'core/providers/storeProvider';
 import { ThemeProvider } from 'core/providers/themeProvider';
-import '../_app/styles/global.css';
+import '../core/styles/global.css';
 import { useEffect } from 'react';
 import NotFound from 'page/NotFound/NotFound';
 
