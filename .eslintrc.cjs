@@ -22,9 +22,5 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     "react-compiler/react-compiler": "error",
     "react/react-in-jsx-scope": "off",
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
   },
 }
