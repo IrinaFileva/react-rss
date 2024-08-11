@@ -12,7 +12,8 @@ interface MovieCardListProps {
 export default function MovieCardList({ data }: MovieCardListProps) {
   const router = useRouter();
   const params = useParams();
-  const page = params.page ? params.page[0] : '1';
+  const page = params && params.page ? params.page[0] : '1';
+  const search = params && params.search ? params.search : Paths.searchParams;
 
   return (
     <main className={styles.mainHomePage}>
@@ -22,9 +23,7 @@ export default function MovieCardList({ data }: MovieCardListProps) {
           <div
             className={styles.characterCardList}
             data-testid="list"
-            onClick={() =>
-              router.push(`/${params[Paths.searchParams]}/${page}`)
-            }
+            onClick={() => router.push(`/${search}/${page}`)}
           >
             {data.Search &&
               data.Search.map((movie: Movie, index: number) => (

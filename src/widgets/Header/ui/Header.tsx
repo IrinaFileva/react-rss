@@ -8,7 +8,8 @@ import { Paths } from 'shared/types';
 
 export const Header: FC = () => {
   const params = useParams();
-  const isPage = params ? params.page[0] === Paths.pageParams : false;
+  const isPage =
+    params && params.page ? params.page[0] === Paths.pageParams : false;
 
   if (isPage) redirect('/search/1');
 

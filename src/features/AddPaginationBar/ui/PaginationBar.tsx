@@ -17,7 +17,7 @@ export const PaginationBar: FC<PaginationProps> = ({ totalResults }) => {
   const countPage: string[] = getPageCount(totalResults);
   const router = useRouter();
   const params = useParams();
-  const activePage = params.page ? params.page[0] : '1';
+  const activePage = params && params.page ? params.page[0] : '1';
 
   const countStart: number =
     getSomePagination(countPage, limitMoviesOnPage, +activePage) *

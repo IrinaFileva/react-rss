@@ -1,8 +1,9 @@
 'use client';
-import { MovieById, Paths, TeamMovie } from 'shared/types';
+import { MovieById, TeamMovie } from 'shared/types';
 import { useParams, useRouter } from 'next/navigation';
 import styles from './DetailedInfoMovies.module.css';
 import Image from 'next/image';
+import { INITIAL_REQUEST } from 'shared/constants';
 
 interface DetailedInfoMoviesProps {
   movie: MovieById | undefined;
@@ -11,14 +12,15 @@ interface DetailedInfoMoviesProps {
 export default function DetailedInfoMovies({ movie }: DetailedInfoMoviesProps) {
   const router = useRouter();
   const params = useParams();
-  const page = params.page ? params.page[0] : '1';
+  const page = params && params.page ? params.page[0] : '1';
+  const search = params && params.search ? params.search : INITIAL_REQUEST;
 
   return (
     movie && (
       <>
         <button
           className="button"
-          onClick={() => router.push(`/${params[Paths.searchParams]}/${page}`)}
+          onClick={() => router.push(`/${search}/${page}`)}
         >
           Close
         </button>
