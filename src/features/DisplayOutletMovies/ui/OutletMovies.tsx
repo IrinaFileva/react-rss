@@ -1,23 +1,28 @@
 import { FC } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Paths, TeamMovie } from 'shared/types';
+import { MovieById, TeamMovie } from 'shared/types';
 import { Spinner } from 'shared/lib/ui/Spinner';
-import { useGetMovieByIdQuery } from 'shared/lib/api';
 import './OutletMovies.css';
+import {
+  Link,
+  useLoaderData,
+  useNavigation,
+  useParams,
+} from '@remix-run/react';
 
 export const OutletMovies: FC = () => {
-  const { id } = useParams();
-  const { page } = useParams();
-  const { data, isFetching } = useGetMovieByIdQuery(id || '');
+  const data: MovieById = useLoaderData();
+  const { search, page, id } = useParams();
+  const { state } = useNavigation();
+  const isLoading = state === 'loading';
 
   return (
     <div className="movieID">
-      {isFetching ? (
+      {isLoading && id ? (
         <Spinner />
       ) : (
         data && (
           <>
-            <Link to={`/${Paths.search}${page}`}>
+            <Link to={`/${search}/${page}`}>
               <button className="button movieID_button">Close</button>
             </Link>
             <img

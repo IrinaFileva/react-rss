@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
-import { NotFound } from './NotFound';
 import { render } from '@testing-library/react';
+import NotFound from './NotFound';
 
 it('testing Not Found Page', () => {
   const { getByText } = render(

@@ -1,57 +1,30 @@
-import { store } from 'app/providers/storeProvider';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
+import { store } from 'core/providers/storeProvider';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { BASE_URL } from 'shared/constants';
-import { MovieById } from 'shared/types';
-import { OutletMovies } from './OutletMovies';
 import { render, waitFor, screen } from '@testing-library/react';
+import DetailsPage, { loader } from 'app/routes/$search.$page.details.$id';
+import { createRemixStub } from '@remix-run/testing';
+import { testMovieById } from 'shared/test';
 
-const mockId = 'tt1285016';
-
-const mockData: MovieById = {
-  Poster: 'https://www.kinopoisk.ru/picture/2836590/',
-  Title: 'Super Men',
-  Type: 'movie',
-  Year: '1978',
-  Actors: 'Ivan',
-  Director: 'Vova',
-  Plot: 'Super',
-};
-
-const handlers = [
-  http.get(`${BASE_URL}&i=${mockId}&plot=short`, async () => {
-    return HttpResponse.json(mockData);
-  }),
-];
-
-const server = setupServer(...handlers);
+const MockDetailsPage = createRemixStub([
+  {
+    path: '/search/1/details/tt1285016',
+    Component: DetailsPage,
+    loader(): Awaited<ReturnType<typeof loader>> {
+      return testMovieById;
+    },
+  },
+]);
 
 describe('testing OutletMovies', () => {
-  beforeAll(() => {
-    server.listen();
-  });
-
-  afterEach(() => {
-    server.resetHandlers();
-  });
-
-  afterAll(() => {
-    server.close();
-  });
-
   it('testing display data', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <OutletMovies />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MockDetailsPage initialEntries={['/search/1/details/tt1285016']} />
+      </Provider>
     );
 
     await waitFor(() => {
-      expect(screen.getAllByText('Super Men')).toHaveLength(1);
+      expect(screen.getByText(/Super Men/)).toBeInTheDocument();
     });
   });
 });

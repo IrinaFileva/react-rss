@@ -1,15 +1,10 @@
-import { ChangeEvent, FC } from 'react';
-import { Link } from 'react-router-dom';
-import { Paths } from 'shared/types';
-import { useLocalStorage } from 'shared/lib/hooks';
+import { ChangeEvent, FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
-interface Props {
-  onClickCheck: (request: string) => void;
-}
-
-export const SearchBar: FC<Props> = ({ onClickCheck }) => {
-  const [request, setRequest] = useLocalStorage();
+export const SearchBar: FC = () => {
+  const [request, setRequest] = useState('');
+  const navigate = useNavigate();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const title = event.target.value;
@@ -18,7 +13,7 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
 
   const onClick = (): void => {
     const title = request.trim();
-    onClickCheck(title);
+    navigate(`/${title}/1`);
   };
 
   return (
@@ -32,15 +27,9 @@ export const SearchBar: FC<Props> = ({ onClickCheck }) => {
           placeholder="Enter the movie title"
           onChange={(event) => onChange(event)}
         ></input>
-        <Link to={`/${Paths.search}${1}`}>
-          <button
-            className="button buttonSearch"
-            onClick={onClick}
-            type="button"
-          >
-            Search
-          </button>
-        </Link>
+        <button className="button buttonSearch" onClick={onClick} type="button">
+          Search
+        </button>
       </form>
     </>
   );

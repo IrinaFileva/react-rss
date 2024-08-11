@@ -5,6 +5,14 @@
   margin-top: 30px;
 }
 
+h1 {
+  color: var(--text-color);
+  backdrop-filter: blur(10px);
+  font-size: 3.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
 .searchInput {
   width: 35rem;
   font-size: 22px;
