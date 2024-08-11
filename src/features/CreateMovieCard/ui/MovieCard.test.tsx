@@ -3,7 +3,7 @@ import { MovieCard } from './MovieCard';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { store } from 'app/providers/storeProvider/config/store';
+import { store } from 'core/providers/storeProvider/config/store';
 import { testMovie } from 'shared/test';
 
 describe('testing Card', () => {
@@ -38,7 +38,7 @@ describe('testing Card', () => {
       </BrowserRouter>
     );
 
-    const card = getByTestId('123456');
+    const card = getByTestId(testMovie.imdbID);
     expect(card).toBeInTheDocument();
     await userEvent.click(card);
     const url = `/details/${testMovie.imdbID}`;

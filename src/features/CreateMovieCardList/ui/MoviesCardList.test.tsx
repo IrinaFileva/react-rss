@@ -1,95 +1,56 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { MovieResponse } from 'shared/types';
-import { MovieCardList } from './MoviesCardList';
-import { BrowserRouter } from 'react-router-dom';
-import { store } from 'app/providers/storeProvider/config/store';
+import { store } from 'core/providers/storeProvider/config/store';
 import { Provider } from 'react-redux';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
-import { BASE_URL } from 'shared/constants';
-import { testMovies } from 'shared/test';
-
-const mockPage = 1;
-const testRequest: string = 'new';
+import { testMovies, testResponseError } from 'shared/test';
+import { createRemixStub } from '@remix-run/testing';
+import MainPage, { loader } from 'app/routes/$search.$page';
 
 const testMoviesResponse: MovieResponse = {
   Search: testMovies,
   totalResults: '300',
 };
 
-describe('testing CardList', () => {
-  const handler = [
-    http.get(`${BASE_URL}&s=${testRequest}&page=${mockPage}`, async () => {
-      return HttpResponse.json(testMoviesResponse);
-    }),
-  ];
+const MockMainPage = createRemixStub([
+  {
+    path: '/search/1',
+    Component: MainPage,
+    loader(): Awaited<ReturnType<typeof loader>> {
+      return testMoviesResponse;
+    },
+  },
+]);
 
-  const server = setupServer(...handler);
+const MockMainPageNotFound = createRemixStub([
+  {
+    path: '/search/1',
+    Component: MainPage,
+    loader(): Awaited<ReturnType<typeof loader>> {
+      return testResponseError;
+    },
+  },
+]);
 
-  beforeAll(() => {
-    server.listen();
-  });
-
-  afterEach(() => {
-    server.resetHandlers();
-  });
-
-  afterAll(() => {
-    server.close();
-  });
-
-  it('testing the number of cards, should be 10', async () => {
+describe('testing CardList if movie not found', () => {
+  it('testing item', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <MovieCardList request={testRequest} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MockMainPage initialEntries={['/search/1']} />
+      </Provider>
     );
-
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-
     await waitFor(() => {
       expect(screen.getAllByText('Super Men')).toHaveLength(10);
     });
   });
-});
-
-describe('testing CardList if movie not found', () => {
-  const responseError = { Error: 'Movie not found!' };
-
-  const requestError = 'ewjrjdi';
-
-  const handler = [
-    http.get(`${BASE_URL}&s=${requestError}&page=${mockPage}`, async () => {
-      return HttpResponse.json(responseError);
-    }),
-  ];
-
-  const serverError = setupServer(...handler);
-
-  beforeAll(() => {
-    serverError.listen();
-  });
-
-  afterEach(() => {
-    serverError.resetHandlers();
-  });
-
-  afterAll(() => {
-    serverError.close();
-  });
 
   it('testing error', async () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <MovieCardList request={requestError} />
-        </Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <MockMainPageNotFound initialEntries={['/search/1']} />
+      </Provider>
     );
     await waitFor(() => {
-      expect(screen.getByText('Movie not found!')).toBeInTheDocument();
+      expect(screen.getByText(/Oops/)).toBeInTheDocument();
     });
   });
 });

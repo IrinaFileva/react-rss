@@ -4,4 +4,5 @@ export {
   mockPathRequest,
   testMovieById,
   testMoviesResponse,
+  testResponseError,
 } from './mockData';

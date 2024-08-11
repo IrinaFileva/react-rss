@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Movie, Paths } from 'shared/types';
+import { NavLink } from '@remix-run/react';
+import { Movie } from 'shared/types';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks';
 import {
   addMovie,
@@ -17,7 +17,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const dispatch = useAppDispatch();
   const selectedMovies = useAppSelector(getSelectedMovies);
   const [isChecked, setChecked] = useState<boolean>(
-    selectedMovies.includes(movie)
+    selectedMovies.some((m) => m.imdbID === movie.imdbID)
   );
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const MovieCard: FC<MovieCardProps> = ({ movie }) => {
       className="movieCard card"
       data-testid={movie.imdbID}
       onClick={(e) => e.stopPropagation()}
-      to={`${Paths.details}${movie.imdbID}`}
+      to={`details/${movie.imdbID}`}
     >
       <img
         className="movieCard_image card"

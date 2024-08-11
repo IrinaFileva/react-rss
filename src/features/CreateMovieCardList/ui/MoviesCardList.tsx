@@ -1,30 +1,27 @@
 import { FC } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+  useParams,
+} from '@remix-run/react';
 import { MovieCard } from 'features/CreateMovieCard';
 import { PaginationBar } from 'features/AddPaginationBar';
-import { Movie, Paths } from 'shared/types';
+import { Movie, MovieResponse } from 'shared/types';
 import { Spinner } from 'shared/lib/ui/Spinner';
-import { useGetMoviesQuery } from 'shared/lib/api';
-import { INITIAL_REQUEST } from 'shared/constants';
 import './MoviesCardList.css';
 
-interface MovieCardListProps {
-  request: string;
-}
-
-export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
+export const MovieCardList: FC = () => {
+  const data: MovieResponse = useLoaderData();
   const navigate = useNavigate();
-  const { page } = useParams();
-  const query = request ? request : INITIAL_REQUEST;
+  const { state } = useNavigation();
+  const isLoading = state === 'loading';
+  const { search, page, id } = useParams();
   const activePage = page ? +page : 1;
-  const { data, isFetching } = useGetMoviesQuery({
-    title: query,
-    page: activePage,
-  });
 
   return (
     <main className="mainHomePage">
-      {isFetching ? (
+      {isLoading && !id ? (
         <Spinner />
       ) : data && !data.Error ? (
         <>
@@ -35,7 +32,7 @@ export const MovieCardList: FC<MovieCardListProps> = ({ request }) => {
           <div
             className="characterCardList"
             data-testid="list"
-            onClick={() => navigate(`/${Paths.search}${page}`)}
+            onClick={() => navigate(`/${search}/${page}`)}
           >
             {data.Search &&
               data.Search.map((movie: Movie) => (

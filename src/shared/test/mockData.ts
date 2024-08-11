@@ -29,6 +29,12 @@ export const testMoviesResponse: MovieResponse = {
   totalResults: '300',
 };
 
+export const testResponseError: MovieResponse = {
+  Error: 'Oops',
+  Search: [],
+  totalResults: '0',
+};
+
 export const mockPathRequest = 'http://www.omdbapi.com/';
 
 export { testMovies };
