@@ -4,8 +4,7 @@ import { testMovie } from 'shared/test';
 
 export const mockMovie: Movie[] = new Array(1).fill(testMovie);
 
-const resultCsv =
-  'data:text/csv;charset=utf-8,Title,Year,imdbID,Type,Poster%0ASuper%20Men,1978,123456,movie,https://www.kinopoisk.ru/picture/2836590/%20%0A';
+const resultCsv = `data:text/csv;charset=utf-8,Title,Year,imdbID,Type,Poster%0ASuper%20Men,1978,${mockMovie[0].imdbID},movie,https://www.kinopoisk.ru/picture/2836590/%20%0A`;
 
 test('testing getItemsForCsv', () => {
   const result = getItemsForCsv(mockMovie);

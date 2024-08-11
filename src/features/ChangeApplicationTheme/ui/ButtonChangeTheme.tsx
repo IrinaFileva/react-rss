@@ -7,7 +7,7 @@ export const ButtonTheme: FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <label id="switch" className="switch">
+    <label id="switch" className="switch" data-testid={theme}>
       <input
         type="checkbox"
         checked={theme === Theme.LIGHT ? true : false}

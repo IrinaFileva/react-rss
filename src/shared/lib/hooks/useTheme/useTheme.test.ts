@@ -5,8 +5,10 @@ import { useTheme } from './useTheme';
 it('testing custom hook ', async () => {
   const { result } = renderHook(() => useTheme());
   const { theme, toggleTheme } = result.current;
+
   await waitFor(() => {
     toggleTheme();
   });
-  expect(Theme.DARK).toBe(theme);
+
+  expect(theme).toBe(Theme.DARK);
 });
