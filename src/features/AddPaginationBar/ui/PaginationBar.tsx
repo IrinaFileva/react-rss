@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from '@remix-run/react';
 import { getPageCount, getSomePagination } from 'shared/lib/changeData';
-import { Paths } from 'shared/types';
 import './PaginationBar.css';
 
 interface PaginationProps {
@@ -18,6 +17,7 @@ export const PaginationBar: FC<PaginationProps> = ({
   const [shift, addShist] = useState<number>(0);
   const [countClick, setClick] = useState<number>(0);
   const countPage: string[] = getPageCount(totalResults);
+  const { search } = useParams();
 
   const countStart: number =
     getSomePagination(countPage, limitMoviesOnPage, activePage) *
@@ -45,7 +45,7 @@ export const PaginationBar: FC<PaginationProps> = ({
           onClick={onClickPrev}
           disabled={+shift <= 0}
         >
-          &#9668; prev 10
+          {'< prev 10'}
         </button>
         <div className="paginationWindow">
           <div
@@ -59,7 +59,7 @@ export const PaginationBar: FC<PaginationProps> = ({
                   isActive ? 'page activePage' : 'page'
                 }
                 key={index}
-                to={`/${Paths.search}${page}`}
+                to={`/${search}/${page}`}
               >
                 {page}
               </NavLink>
@@ -73,7 +73,7 @@ export const PaginationBar: FC<PaginationProps> = ({
           }
           className="paginationButton"
         >
-          next 10 &#9658;
+          {'next 10 >'}
         </button>
       </div>
     )

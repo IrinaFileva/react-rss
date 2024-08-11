@@ -1,16 +1,16 @@
 .pagination {
   display: flex;
   gap: 5px;
-  padding: 20px 0;
 }
 
 .page {
   min-width: 32px;
+  height: 32px;
   background-color: var(--bg-color);
   border-radius: 100%;
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  padding: 5px;
+  padding: 8px;
   text-align: center;
   font-size: 14px;
   text-decoration: none;
