@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "remix vite:dev",
+    "build": "remix vite:build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,html}\"",
     "preview": "vite preview",
@@ -17,6 +17,12 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "@remix-run/dev": "^2.11.1",
+    "@remix-run/express": "^2.11.1",
+    "@remix-run/node": "^2.11.1",
+    "@remix-run/react": "^2.11.1",
+    "@remix-run/testing": "^2.11.1",
+    "isbot": "^4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1"

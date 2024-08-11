@@ -22,7 +22,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vitest/globals"]
+    "types": ["@remix-run/node","vitest/globals", "vite/client"]
   },
   "include": ["src"]
 }
