@@ -1,8 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: antiquewhite;
+}
+
+#root {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .notFound {

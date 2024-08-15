@@ -1,5 +1,6 @@
 export enum Paths {
-  main = '/',
+  start = '/',
+  main = '/main',
   uncontrolledForm = '/uncontrolledForm',
   hookForm = '/hookForm',
 }
