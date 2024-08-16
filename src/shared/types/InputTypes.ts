@@ -26,15 +26,3 @@ export enum LabelTitle {
   country = 'Country',
   tc = 'Accept Terms and Conditions',
 }
-
-export type RefFormInput = {
-  name: string;
-  age: string;
-  email: string;
-  pass: string;
-  confirmPass: string;
-  gender: string;
-  ts: boolean;
-  file: FileList | null;
-  country: string;
-};

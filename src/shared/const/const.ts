@@ -243,3 +243,12 @@ export const COUNTRIES = [
   'Zambia',
   'Zimbabwe',
 ];
+
+export const RegExpNumber: RegExp = /[0-9]/;
+
+export const RegExpLowercase: RegExp = /[a-z]/;
+
+export const RegExpUppercase: RegExp = /[A-Z]/;
+
+export const RegExpSpecialSymbols: RegExp =
+  /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
