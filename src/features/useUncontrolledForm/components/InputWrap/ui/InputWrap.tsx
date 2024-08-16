@@ -5,18 +5,27 @@ import styles from './InputWrap.module.css';
 interface WrapProps {
   children: ReactNode;
   name: keyof InputName;
-  title?: string;
+  title: string;
+  isValid: boolean;
   error?: string;
 }
 
-export const InputWrap: FC<WrapProps> = ({ children, name, title, error }) => {
+export const InputWrap: FC<WrapProps> = ({
+  children,
+  name,
+  title,
+  isValid,
+  error,
+}) => {
   return (
     <div className={styles.inputFormWrapper}>
       <div className={styles.labelSpanWrap}>
         <label htmlFor={name} className={styles.labelForm}>
           {title}
         </label>
-        <span className={styles.hintErrorForm}>{error && `*${error}`}</span>
+        {!isValid && (
+          <span className={styles.hintErrorForm}>{error && `*${error}`}</span>
+        )}
       </div>
       {children}
     </div>

@@ -1,6 +1,6 @@
 export enum Gender {
   man = 'Man',
-  woman = 'woman',
+  woman = 'Woman',
 }
 
 export type InputName = {
@@ -8,9 +8,11 @@ export type InputName = {
   age: number;
   email: string;
   pass: string;
+  file: FileList;
   confirmPass: string;
   gender: Gender;
   country: string;
+  tc: string;
 };
 
 export enum LabelTitle {
@@ -24,3 +26,15 @@ export enum LabelTitle {
   country = 'Country',
   tc = 'Accept Terms and Conditions',
 }
+
+export type RefFormInput = {
+  name: string;
+  age: string;
+  email: string;
+  pass: string;
+  confirmPass: string;
+  gender: string;
+  ts: boolean;
+  file: FileList | null;
+  country: string;
+};
