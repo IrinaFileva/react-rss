@@ -1,13 +1,12 @@
-import { FC, useEffect, useState } from 'react';
-import { getError } from 'shared/lib/getError';
+import { FC } from 'react';
 import { Gender, InputName } from 'shared/types/InputTypes';
-import { schema } from 'shared/types/validationSchema';
 import { InputWrap } from '../../InputWrap';
 
 interface SelectGenderProps {
   name: keyof InputName;
   title: string;
   refs: React.MutableRefObject<HTMLSelectElement>;
+  isValid: boolean;
   error?: string;
 }
 
@@ -16,36 +15,13 @@ export const SelectGender: FC<SelectGenderProps> = ({
   title,
   refs,
   error,
+  isValid,
 }) => {
-  const [err, setErr] = useState<string>('');
-  const [isValid, setIsValid] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (error) {
-      setErr(error);
-    } else {
-      setErr('');
-    }
-  }, [error]);
-
-  const onChange = async () => {
-    try {
-      const value = { [name]: refs.current.value };
-      await schema.validateAt(name, value, { abortEarly: false });
-      setErr('');
-      setIsValid(true);
-    } catch (e) {
-      setErr(getError(e));
-      setIsValid(false);
-    }
-  };
-
   return (
-    <InputWrap name={name} title={title} error={err} isValid={isValid}>
+    <InputWrap name={name} title={title} error={error} isValid={isValid}>
       <select
-        className="selectForm"
+        className={`selectForm ${isValid}`}
         ref={refs}
-        onChange={onChange}
         id={name}
         defaultValue={'no-select'}
       >

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CountriesSchema } from 'entities/Сountries';
+import { CountriesSchema } from 'entities/Countries';
 import { COUNTRIES } from 'shared/const';
 
 const initialState: CountriesSchema = {

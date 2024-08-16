@@ -47,3 +47,7 @@ body {
 .dataList {
   max-width: 60vh;
 }
+
+.false {
+  border: 2px solid red;
+}
