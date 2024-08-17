@@ -31,7 +31,7 @@ export const Input: FC<InputProps> = ({
         type={type}
         placeholder={title}
         className={`inputForm ${isValid}`}
-        autoComplete="false"
+        autoComplete="off"
         onChange={(e) => setValue(e.target.value)}
       />
       {name === 'pass' &&
@@ -43,7 +43,7 @@ export const Input: FC<InputProps> = ({
             max={1}
           />
         )}
-      {checkPassword(value) === 1 && (
+      {name === 'pass' && checkPassword(value) === 1 && (
         <h3 className="passwordTitle">The password is strong</h3>
       )}
     </InputWrap>

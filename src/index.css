@@ -9,7 +9,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: antiquewhite;
+  background-color: rgb(27, 27, 27);
 }
 
 #root {
@@ -26,7 +26,7 @@ body {
 }
 
 .selectForm {
-  width: 95%;
+  width: 100%;
   font-size: 17px;
   height: 35px;
   border: 2px solid rgb(14, 13, 13);
@@ -50,4 +50,19 @@ body {
 
 .false {
   border: 2px solid red;
+}
+
+.buttonSubmit {
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid black;
+  margin-top: 10px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttonSubmit:hover {
+  background-color: rgb(75, 159, 45);
 }

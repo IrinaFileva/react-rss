@@ -28,7 +28,7 @@ export const SelectCountries: FC<SelectCountriesProps> = ({
         id={name}
         list={`${name}-list`}
         ref={refs}
-        autoComplete="true"
+        autoComplete="on"
         className={`selectForm ${isValid}`}
       />
       <datalist id={`${name}-list`} className="dataList">

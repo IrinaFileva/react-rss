@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { InputName } from 'shared/types/InputTypes';
-import styles from './InputWrap.module.css';
+import './InputWrap.css';
 
 interface WrapProps {
   children: ReactNode;
@@ -18,13 +18,13 @@ export const InputWrap: FC<WrapProps> = ({
   error,
 }) => {
   return (
-    <div className={styles.inputFormWrapper}>
-      <div className={styles.labelSpanWrap}>
-        <label htmlFor={name} className={styles.labelForm}>
+    <div className="inputFormWrapper">
+      <div className="labelSpanWrap">
+        <label htmlFor={name} className="labelForm">
           {title}
         </label>
         {!isValid && (
-          <span className={styles.hintErrorForm}>{error && `*${error}`}</span>
+          <span className="hintErrorForm">{error && `*${error}`}</span>
         )}
       </div>
       {children}
