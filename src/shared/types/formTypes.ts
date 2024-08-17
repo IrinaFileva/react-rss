@@ -18,7 +18,7 @@ export type DataForm = {
   confirmPass: string;
   gender: string;
   tc: boolean;
-  file: FileList | null;
+  file: File | null;
   country: string;
 };
 
@@ -30,6 +30,6 @@ export interface SaveFormData {
   confirmPass: string;
   gender: string;
   tc: boolean;
-  file: string | null;
+  file: string;
   country: string;
 }

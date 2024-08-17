@@ -12,6 +12,8 @@ import {
 import styles from './UncontrolledForm.module.css';
 import { useAppDispatch } from 'shared/lib/hooks';
 import { addNewForm, addUncontrolledForm } from 'entities/DataForms';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from 'shared/types/routerTypes';
 
 export const UncontrolledForm = () => {
   const formRefs: FormRefs = {
@@ -29,6 +31,7 @@ export const UncontrolledForm = () => {
   const formRef = useRef<HTMLFormElement>(null!);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,9 +41,10 @@ export const UncontrolledForm = () => {
     if (result) {
       setErrors(result);
     } else {
-      const data = convertFormData(formData);
+      const data = await convertFormData(formData);
       dispatch(addUncontrolledForm(data));
       dispatch(addNewForm('notHook'));
+      navigate(Paths.main);
       setTimeout(() => {
         dispatch(addNewForm(null));
       }, 5000);

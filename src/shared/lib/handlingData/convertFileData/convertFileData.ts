@@ -1,15 +1,9 @@
-export function convertFileData(file: FileList | null): string | null {
-  if (!file) return null;
-
-  let result = '';
-
+export function convertFileData(file: File): Promise<string> {
   const FR = new FileReader();
-
-  FR.readAsDataURL(file[0]);
-
-  FR.onload = () => {
-    result = FR.result as string;
-  };
-
-  return result;
+  FR.readAsDataURL(file);
+  return new Promise((resolve) => {
+    FR.onload = () => {
+      resolve(FR.result as string);
+    };
+  });
 }
