@@ -1,0 +1,34 @@
+.uncontrolledFormWrap {
+  background: linear-gradient(to right, #868f96 0%, #596164 100%);
+  border-radius: 10px;
+  padding: 25px 0 15px;
+}
+
+.uncontrolledForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.allInputs {
+  max-height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.genderWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.dataSupport {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dataSupport .labelForm {
+  font-size: 24px;
+}

@@ -1,5 +1,6 @@
+import { UncontrolledForm } from 'features/useUncontrolledForm';
 import { FC } from 'react';
 
 export const UncontrolledFormPage: FC = () => {
-  return <div>Uncontrolled Form</div>
-}
+  return <UncontrolledForm />;
+};
