@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppSelector } from 'shared/lib/hooks';
-import { InputName } from 'shared/types/InputTypes';
-import { InputWrap } from '../../InputWrap';
+import { InputName } from 'shared/types';
+import { InputWrap } from 'shared/ui/InputWrap';
 import { getCountries } from 'entities/Countries';
 
 interface SelectCountriesProps {

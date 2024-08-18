@@ -20,7 +20,8 @@ export const Card: FC<CardProps> = ({ data, active }) => {
         <p>Gender: {data.gender}</p>
         <p>Country: {data.country}</p>
         <p>
-          Terms accepted: <input type="checkbox" checked={data.tc} />
+          Terms accepted:{' '}
+          <input type="checkbox" defaultChecked={data.tc} disabled />
         </p>
       </div>
     </div>

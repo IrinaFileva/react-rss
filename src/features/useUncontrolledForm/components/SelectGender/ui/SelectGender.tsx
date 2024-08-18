@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Gender, InputName } from 'shared/types/InputTypes';
-import { InputWrap } from '../../InputWrap';
+import { Gender, InputName } from 'shared/types';
+import { InputWrap } from 'shared/ui/InputWrap';
 
 interface SelectGenderProps {
   name: keyof InputName;

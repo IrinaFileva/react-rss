@@ -1,19 +1,17 @@
-import { Input } from 'features/useUncontrolledForm/components/Input';
-import { LabelTitle } from 'shared/types/InputTypes';
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
-import { FormRefs } from 'shared/types/formTypes';
+import { Input } from '../components/Input';
 import { SelectGender } from '../components/SelectGender';
 import { SelectCountries } from '../components/SelectCountries';
+import { useAppDispatch } from 'shared/lib/hooks';
+import { addNewForm, addUncontrolledForm } from 'entities/DataForms';
+import { FormRefs, LabelTitle, Paths } from 'shared/types';
 import {
   convertFormData,
   getFormData,
   validateForm,
 } from 'shared/lib/handlingData';
 import styles from './UncontrolledForm.module.css';
-import { useAppDispatch } from 'shared/lib/hooks';
-import { addNewForm, addUncontrolledForm } from 'entities/DataForms';
-import { useNavigate } from 'react-router-dom';
-import { Paths } from 'shared/types/routerTypes';
 
 export const UncontrolledForm = () => {
   const formRefs: FormRefs = {
@@ -36,7 +34,9 @@ export const UncontrolledForm = () => {
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = getFormData(formRefs);
+    console.log(formData);
     const result = await validateForm(formData);
+    console.log(result);
 
     if (result) {
       setErrors(result);
@@ -129,7 +129,7 @@ export const UncontrolledForm = () => {
           isValid={!errors.tc}
           error={errors.tc}
         />
-        <button className="buttonSubmit" type="submit">
+        <button className={styles.buttonSubmit} type="submit">
           Submit
         </button>
       </form>
