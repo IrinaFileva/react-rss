@@ -1,0 +1,51 @@
+.inputFormWrapper {
+  width: 430px;
+  position: relative;
+  padding: 0px 25px;
+  text-align: left;
+}
+
+.labelForm {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+.hintErrorForm {
+  display: inline-flex;
+  justify-content: end;
+  max-width: 270px;
+  max-height: 30px;
+  background-color: rgb(44, 43, 43);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(241, 55, 55);
+  letter-spacing: 1px;
+  overflow: auto;
+}
+
+.labelSpanWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputFormWrapper:has(> input[type='checkbox']) .labelSpanWrap {
+  width: 100%;
+  position: relative;
+  margin-top: 5px;
+}
+.inputFormWrapper:has(> input[type='checkbox']) .hintErrorForm {
+  position: absolute;
+  max-width: 100%;
+  top: 0;
+  right: 0;
+}
+
+.inputFormWrapper:has(> input[type='checkbox']) .labelForm {
+  padding-top: 20px;
+  max-width: 100%;
+}

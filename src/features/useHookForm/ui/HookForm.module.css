@@ -1,0 +1,27 @@
+.hookFormWrap {
+  background: linear-gradient(to right, #868f96 0%, #596164 100%);
+  border-radius: 10px;
+  padding: 25px 0 15px;
+  margin-top: 3%;
+}
+
+.hookForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonSubmit {
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: 2px solid black;
+  margin-top: 10px;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttonSubmit.not[disabled]:hover {
+  background-color: rgb(75, 159, 45);
+}
