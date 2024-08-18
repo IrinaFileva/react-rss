@@ -2,6 +2,7 @@
   background: linear-gradient(to right, #868f96 0%, #596164 100%);
   border-radius: 10px;
   padding: 25px 0 15px;
+  margin-top: 3%;
 }
 
 .uncontrolledForm {
