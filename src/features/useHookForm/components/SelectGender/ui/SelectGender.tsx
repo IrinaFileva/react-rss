@@ -26,6 +26,7 @@ export const SelectGender: FC<SelectCountriesProps> = ({
         className={`${styles.selectForm} ${styles[`${isValid}`]}`}
         {...register(name)}
         id={name}
+        autoComplete="on"
         defaultValue={'no-select'}
       >
         <option value="no-select" disabled>

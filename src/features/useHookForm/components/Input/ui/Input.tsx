@@ -32,6 +32,7 @@ export const Input: FC<InputProps> = ({
         placeholder={title}
         {...register(name)}
         id={name}
+        autoComplete="on"
         onInput={(e) => setValue(e.currentTarget.value)}
       />
       {name === 'pass' && checkPassword(value) !== 1 && (

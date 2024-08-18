@@ -24,6 +24,7 @@ export const SelectGender: FC<SelectGenderProps> = ({
         ref={refs}
         id={name}
         defaultValue={'no-select'}
+        autoComplete="on"
       >
         <option value="no-select" disabled>
           Select gender

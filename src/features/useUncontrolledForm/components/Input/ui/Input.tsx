@@ -31,7 +31,7 @@ export const Input: FC<InputProps> = ({
         type={type}
         placeholder={title}
         className={`${styles.inputForm} ${styles[`${isValid}`]}`}
-        autoComplete="off"
+        autoComplete="on"
         onChange={(e) => setValue(e.target.value)}
       />
       {name === 'pass' && checkPassword(value) !== 1 && (

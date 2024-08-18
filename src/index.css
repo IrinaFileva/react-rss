@@ -51,18 +51,3 @@ body {
 .false {
   border: 2px solid red;
 }
-
-.buttonSubmit {
-  width: 100px;
-  height: 30px;
-  border-radius: 10px;
-  border: 2px solid black;
-  margin-top: 10px;
-  font-size: medium;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.buttonSubmit:hover {
-  background-color: rgb(75, 159, 45);
-}
