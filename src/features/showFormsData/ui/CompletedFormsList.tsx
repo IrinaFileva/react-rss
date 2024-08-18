@@ -27,6 +27,20 @@ export const CompletedFormsList: FC = () => {
           })}
         </section>
       )}
+      {hookForm.length !== 0 && (
+        <section className={styles.uncontrolledFormList}>
+          <h2>Hook Form Data</h2>
+          {hookForm.map((data: SaveFormData, index: number) => {
+            return (
+              <Card
+                key={index}
+                data={data}
+                active={newForm === 'hook' && index === 0}
+              />
+            );
+          })}
+        </section>
+      )}
     </main>
   );
 };
