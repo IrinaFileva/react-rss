@@ -40,17 +40,29 @@ export const schema = yup.object().shape({
     .string()
     .oneOf([Gender.man, Gender.woman], 'select gender')
     .required(),
-  country: yup.string().oneOf(COUNTRIES, 'select country').required(),
+  country: yup
+    .string()
+    .oneOf(COUNTRIES, 'select country from the list')
+    .required(),
   file: yup
-    .mixed<File>()
-    .test('imageType', 'select .png or .jpg file', (value) => {
-      if (!value) return false;
-      return allowedImageFormat.includes(value.type);
-    })
-    .test('imageSize', 'select file less than 2Mb', (value) => {
-      if (!value) return false;
-      return value.size < allowedImageSize;
-    })
+    .mixed<FileList>()
+    .test('required', 'select a image', (value) => value && value.length > 0)
+    .test(
+      'imageType',
+      'select .png or .jpg file',
+      (value) =>
+        value &&
+        Array.from(value).every((file) =>
+          allowedImageFormat.includes(file.type)
+        )
+    )
+    .test(
+      'imageSize',
+      'select file less than 2Mb',
+      (value) =>
+        value &&
+        Array.from(value).every((item) => item.size <= allowedImageSize)
+    )
     .required(),
   tc: yup.boolean().isTrue('accept the terms and conditions').required(),
 });

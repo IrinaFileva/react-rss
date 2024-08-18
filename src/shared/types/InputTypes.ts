@@ -8,11 +8,11 @@ export type InputName = {
   age: number;
   email: string;
   pass: string;
-  file: FileList;
+  file: File;
   confirmPass: string;
   gender: Gender;
   country: string;
-  tc: string;
+  tc: boolean;
 };
 
 export enum LabelTitle {

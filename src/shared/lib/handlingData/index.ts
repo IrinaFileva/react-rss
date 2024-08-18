@@ -1,3 +1,5 @@
+export { convertFileData } from './convertFileData/convertFileData';
+
 export { convertFormData } from './convertFormData/convertFormData';
 
 export { validateForm } from './validateForm/validateForm';

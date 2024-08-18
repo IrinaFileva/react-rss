@@ -9,8 +9,7 @@ export const getFormData = (refs: FormRefs): DataForm => {
     confirmPass: refs.confirmPass.current.value,
     gender: refs.gender.current.value,
     tc: refs.tc.current.checked,
-    file:
-      refs.file && refs.file.current.files ? refs.file.current.files[0] : null,
+    file: refs.file.current.files,
     country: refs.country.current.value,
   };
 
